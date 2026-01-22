@@ -1,0 +1,18 @@
+{
+	"node": "@customermates/n8n-nodes-webhook-trigger",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Trigger"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://github.com/customermates/n8n-nodes-crm?tab=readme-ov-file#credentials"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/customermates/n8n-nodes-crm?tab=readme-ov-file"
+			}
+		]
+	}
+}

@@ -1,0 +1,69 @@
+{
+	"name": "@customermates/n8n-nodes-crm",
+	"version": "0.1.0",
+	"description": "n8n community node package for Customermates CRM - Modern CRM for small businesses with contacts, organizations, deals, and services management",
+	"license": "MIT",
+	"homepage": "https://customermates.com",
+	"keywords": [
+		"n8n-community-node-package",
+		"customermates",
+		"crm",
+		"customer-relationship-management",
+		"contacts",
+		"organizations",
+		"deals",
+		"services",
+		"automation",
+		"workflow",
+		"gdpr",
+		"small-business"
+	],
+	"author": {
+		"name": "Benjamin Wagner",
+		"email": "benjamin-wagner@mein.gmx"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/customermates/n8n-nodes-crm.git"
+	},
+	"scripts": {
+		"generate-types": "npx -y openapi-typescript https://customermates.com/openapi.json -o lib/generated/types.ts",
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"format": "prettier --write \"**/*.{ts,js,json,md}\"",
+		"format:check": "prettier --check \"**/*.{ts,js,json,md}\"",
+		"release": "n8n-node release",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"strict": true,
+		"credentials": [
+			"dist/credentials/CustomermatesApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/GetContacts/GetContacts.node.js",
+			"dist/nodes/GetContactById/GetContactById.node.js",
+			"dist/nodes/CreateContact/CreateContact.node.js",
+			"dist/nodes/UpdateContact/UpdateContact.node.js",
+			"dist/nodes/DeleteContactById/DeleteContactById.node.js",
+			"dist/nodes/WebhookTrigger/WebhookTrigger.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "*",
+		"eslint": "9.32.0",
+		"prettier": "3.6.2",
+		"release-it": "^19.0.4",
+		"typescript": "5.9.2"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
+}
