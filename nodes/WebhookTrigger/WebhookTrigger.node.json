@@ -1,5 +1,5 @@
 {
-	"node": "@customermates/n8n-nodes-webhook-trigger",
+	"node": "n8n-nodes-customermates-webhook-trigger",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Trigger"],

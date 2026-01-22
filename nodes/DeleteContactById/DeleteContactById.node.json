@@ -1,5 +1,5 @@
 {
-	"node": "@customermates/n8n-nodes-delete-contact-by-id",
+	"node": "n8n-nodes-customermates-delete-contact-by-id",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Contact"],

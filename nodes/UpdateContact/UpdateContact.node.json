@@ -1,5 +1,5 @@
 {
-	"node": "@customermates/n8n-nodes-update-contact",
+	"node": "n8n-nodes-customermates-update-contact",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Contact"],

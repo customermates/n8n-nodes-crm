@@ -1,5 +1,5 @@
 {
-	"name": "@customermates/n8n-nodes-crm",
+	"name": "n8n-nodes-customermates",
 	"version": "0.1.0",
 	"description": "n8n community node package for Customermates CRM - Modern CRM for small businesses with contacts, organizations, deals, and services management",
 	"license": "MIT",
