@@ -14,7 +14,6 @@ _START_PACKAGE
 !.vscode/settings.default.json
 .idea
 nodelinter.config.json
-**/package-lock.json
 packages/**/.turbo
 .turbo
 *.tsbuildinfo
