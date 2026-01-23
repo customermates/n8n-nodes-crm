@@ -1,6 +1,6 @@
 {
-	"name": "n8n-nodes-customermates",
-	"version": "0.1.1",
+	"name": "@customermates/n8n-nodes-crm",
+	"version": "0.2.0",
 	"description": "n8n community node package for Customermates CRM - Modern CRM for small businesses with contacts, organizations, deals, and services management",
 	"license": "MIT",
 	"homepage": "https://customermates.com",
@@ -45,15 +45,11 @@
 		"n8nNodesApiVersion": 1,
 		"strict": true,
 		"credentials": [
-			"dist/credentials/CustomermatesApi.credentials.js"
+			"dist/CustomermatesApi.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/GetContacts/GetContacts.node.js",
-			"dist/nodes/GetContactById/GetContactById.node.js",
-			"dist/nodes/CreateContact/CreateContact.node.js",
-			"dist/nodes/UpdateContact/UpdateContact.node.js",
-			"dist/nodes/DeleteContactById/DeleteContactById.node.js",
-			"dist/nodes/WebhookTrigger/WebhookTrigger.node.js"
+			"dist/Customermates.node.js",
+			"dist/CustomermatesTrigger.node.js"
 		]
 	},
 	"devDependencies": {

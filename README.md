@@ -1,4 +1,4 @@
-# n8n-nodes-customermates
+# @customermates/n8n-nodes-crm
 
 This is an n8n community node package for [Customermates](https://customermates.com), a modern CRM for small businesses. It enables you to integrate Customermates into your n8n workflows, allowing you to automate contact management, deal tracking, and service operations.
 
@@ -12,22 +12,27 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Operations
 
-### Contact Operations
+The Customermates node supports the following operations:
 
-- **Create Contact** - Create a new contact in Customermates with first name, last name, organizations, users, deals, and custom field values
-- **Get Contact By ID** - Retrieve a single contact by its unique identifier (UUID)
-- **Get Contacts** - Search and retrieve multiple contacts with filtering, sorting, and pagination options
-- **Update Contact** - Update existing contact information including name, associations, and custom fields
-- **Delete Contact By ID** - Delete a contact from Customermates by its unique identifier
+- **Create** - Create a new record
+- **Get** - Retrieve a single record by ID
+- **Get Many** - Search and retrieve multiple records with filtering, sorting, and pagination
+- **Update** - Update existing record information
+- **Delete** - Delete a record by ID
+
+### Available Resources
+
+- **Contacts** - Manage contacts with organizations, users, deals, and custom fields
 
 ### Webhook Trigger
 
-- **On New Customermates Event** - Trigger workflows when events occur in Customermates:
-  - Contact events: created, updated, deleted
-  - Organization events: created, updated, deleted
-  - Deal events: created, updated, deleted
-  - Service events: created, updated, deleted
-  - Task events: created, updated, deleted
+The Customermates Trigger node listens for events in Customermates:
+
+- Contact events: created, updated, deleted
+- Organization events: created, updated, deleted
+- Deal events: created, updated, deleted
+- Service events: created, updated, deleted
+- Task events: created, updated, deleted
 
 ## Credentials
 
@@ -53,47 +58,18 @@ For more information about Customermates API keys, visit the [Customermates docu
 
 ## Usage
 
-### Creating a Contact
-
-1. Add the "Create Contact" node to your workflow
-2. Configure the Customermates credentials
-3. Fill in the required fields (First Name, Last Name)
-4. Optionally add organizations, users, deals, and custom field values
-5. Execute the workflow to create the contact
-
-### Searching Contacts
-
-1. Add the "Get Contacts" node to your workflow
-2. Configure search parameters:
-   - Search term (optional)
-   - Sort by (name, createdAt, updatedAt)
-   - Sort direction (ascending or descending)
-   - Maximum items to retrieve (5, 10, 25, 100, or 1000)
-3. The node will return matching contacts with their associated data
-
-### Updating Contacts
-
-1. Add the "Update Contact" node to your workflow
-2. Provide the Contact ID
-3. In the "Update Fields" collection, add only the fields you want to update:
-   - First Name
-   - Last Name
-   - Organizations
-   - Users
-   - Deals
-   - Custom Field Values
-4. Only the specified fields will be updated; other fields remain unchanged
+1. Add the Customermates node to your workflow
+2. Configure the Customermates credentials with your API key
+3. Select the resource (e.g., Contact) and operation (Create, Get, Get Many, Update, or Delete)
+4. Fill in the required fields for your selected operation
+5. Execute the workflow
 
 ### Webhook Triggers
 
-1. Add the "On New Customermates Event" trigger node to your workflow
-2. Select which events you want to listen to (contact.created, deal.updated, etc.)
+1. Add the Customermates Trigger node to your workflow
+2. Select which events you want to listen to
 3. Configure the webhook URL in your Customermates account settings
 4. The workflow will trigger automatically when selected events occur
-
-### Custom Fields
-
-Custom fields can be added to contacts through the "Custom Field Values" option. The node automatically loads available custom columns from your Customermates configuration, allowing you to set values for any custom field defined in your CRM.
 
 ## Resources
 

@@ -4,14 +4,14 @@ import type {
 	ICredentialType,
 	INodeProperties,
 } from 'n8n-workflow';
-import { BASE_URL } from '../constants';
+import { BASE_URL } from './constants';
 
 export class CustomermatesApi implements ICredentialType {
 	name = 'customermatesApi';
 
 	displayName = 'Customermates API';
 
-	icon = 'file:../static/customermates.svg' as const;
+	icon = 'file:customermates.svg' as const;
 
 	documentationUrl =
 		'https://github.com/customermates/n8n-nodes-crm?tab=readme-ov-file#credentials';

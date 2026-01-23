@@ -1,8 +1,8 @@
 {
-	"node": "n8n-nodes-customermates-create-contact",
+	"node": "@customermates/n8n-nodes-crm-customermates",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
-	"categories": ["Contact"],
+	"categories": ["Sales"],
 	"resources": {
 		"credentialDocumentation": [
 			{

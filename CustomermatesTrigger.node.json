@@ -1,8 +1,8 @@
 {
-	"node": "n8n-nodes-customermates-webhook-trigger",
+	"node": "@customermates/n8n-nodes-crm-customermates-trigger",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
-	"categories": ["Trigger"],
+	"categories": ["Sales"],
 	"resources": {
 		"credentialDocumentation": [
 			{

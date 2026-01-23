@@ -25,16 +25,16 @@ type WebhookEvent =
 	| 'task.updated'
 	| 'task.deleted';
 
-export class WebhookTrigger implements INodeType {
+export class CustomermatesTrigger implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'On New Customermates Event - Trigger',
-		name: 'webhookTrigger',
-		icon: 'file:../../static/customermates.svg',
+		displayName: 'Customermates Trigger',
+		name: 'customermatesTrigger',
+		icon: 'file:customermates.svg',
 		group: ['trigger'],
 		version: 1,
 		description: 'Starts the workflow when Customermates events occur',
 		defaults: {
-			name: 'On New Customermates Event',
+			name: 'Customermates Trigger',
 		},
 		inputs: [],
 		outputs: [NodeConnectionTypes.Main],

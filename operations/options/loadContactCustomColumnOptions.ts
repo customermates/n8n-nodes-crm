@@ -2,7 +2,7 @@ import type { ILoadOptionsFunctions, INodePropertyOptions } from 'n8n-workflow';
 import { BASE_URL } from '../../constants';
 import type { paths } from '../../lib/generated/types';
 
-export async function getContactCustomColumns(
+export async function loadContactCustomColumnOptions(
 	this: ILoadOptionsFunctions,
 ): Promise<INodePropertyOptions[]> {
 	const credentials = await this.getCredentials('customermatesApi');
@@ -14,7 +14,7 @@ export async function getContactCustomColumns(
 			method: 'GET',
 			url: `${BASE_URL}/api/v1/contacts/configuration`,
 			headers: {
-				'x-api-key': credentials.apiKey,
+				'x-api-key': credentials.apiKey as string,
 				Accept: 'application/json',
 			},
 			json: true,

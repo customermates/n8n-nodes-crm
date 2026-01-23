@@ -22,11 +22,13 @@
 		"outDir": "./dist/"
 	},
 	"include": [
-		"credentials/**/*",
-		"nodes/**/*",
-		"nodes/**/*.json",
+		"CustomermatesApi.credentials.ts",
+		"Customermates.node.ts",
+		"Customermates.node.json",
+		"CustomermatesTrigger.node.ts",
+		"CustomermatesTrigger.node.json",
+		"operations/**/*",
 		"package.json",
-		"lib/**/*",
-		"lib/generated/**/*"
+		"lib/**/*"
 	]
 }
