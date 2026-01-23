@@ -1,6 +1,6 @@
 # @customermates/n8n-nodes-crm
 
-This is an n8n community node package for [Customermates](https://customermates.com), a modern CRM for small businesses. It enables you to integrate Customermates into your n8n workflows, allowing you to automate contact management, deal tracking, and service operations.
+This is an n8n community node package for [Customermates](https://customermates.com), a modern CRM for small businesses. It enables you to integrate Customermates into your n8n workflows, allowing you to automate contact management, organization tracking, deal management, service operations, and task management.
 
 Customermates is a clean, modern CRM designed for small teams. It's ready to use in 2 minutes, requires no training, is fully GDPR-compliant, and offers powerful automation capabilities through n8n. Made in Germany with data stored in German data centers.
 
@@ -23,6 +23,10 @@ The Customermates node supports the following operations:
 ### Available Resources
 
 - **Contacts** - Manage contacts with organizations, users, deals, and custom fields
+- **Organizations** - Manage organizations with contacts, users, deals, and custom fields
+- **Deals** - Manage deals with organizations, users, contacts, services, and custom fields
+- **Services** - Manage services with users, deals, and custom fields
+- **Tasks** - Manage tasks with users and custom fields
 
 ### Webhook Trigger
 
@@ -60,7 +64,7 @@ For more information about Customermates API keys, visit the [Customermates docu
 
 1. Add the Customermates node to your workflow
 2. Configure the Customermates credentials with your API key
-3. Select the resource (e.g., Contact) and operation (Create, Get, Get Many, Update, or Delete)
+3. Select the resource (Contact, Organization, Deal, Service, or Task) and operation (Create, Get, Get Many, Update, or Delete)
 4. Fill in the required fields for your selected operation
 5. Execute the workflow
 
@@ -83,7 +87,7 @@ For more information about Customermates API keys, visit the [Customermates docu
 Customermates is a modern CRM designed specifically for small businesses. Key features include:
 
 - **Quick Setup**: Ready to use in 2 minutes, no training required
-- **Essential Features**: Contacts, Organizations, Deals, and Services management
+- **Essential Features**: Contacts, Organizations, Deals, Services, and Tasks management
 - **n8n Integration**: Fully automatable with custom workflows and AI agents
 - **GDPR Compliant**: All data stored securely in German data centers
 - **Affordable Pricing**: €10 per user with no hidden costs

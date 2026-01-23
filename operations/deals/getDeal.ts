@@ -3,40 +3,41 @@ import type {
 	ICredentialDataDecryptedObject,
 	IDataObject,
 	INodeExecutionData,
+	INodeProperties,
 } from 'n8n-workflow';
 import { NodeOperationError } from 'n8n-workflow';
 import { BASE_URL } from '../../constants';
 import type { paths } from '../../lib/generated/types';
 
-export async function getContact(
+type GetDealSuccessResponse =
+	paths['/v1/deals/{id}']['get']['responses']['200']['content']['application/json'];
+
+export async function getDeal(
 	this: IExecuteFunctions,
 	itemIndex: number,
 	credentials: ICredentialDataDecryptedObject,
 ): Promise<INodeExecutionData> {
-	const contactId = this.getNodeParameter('contactId', itemIndex) as string;
-
-	type GetContactSuccessResponse =
-		paths['/v1/contacts/{id}']['get']['responses']['200']['content']['application/json'];
+	const dealId = this.getNodeParameter('dealId', itemIndex) as string;
 
 	const response = (await this.helpers.httpRequest({
 		method: 'GET',
-		url: `${BASE_URL}/api/v1/contacts/${contactId}`,
+		url: `${BASE_URL}/api/v1/deals/${dealId}`,
 		headers: {
 			'x-api-key': credentials.apiKey as string,
 			Accept: 'application/json',
 		},
 		json: true,
-	})) as GetContactSuccessResponse;
+	})) as GetDealSuccessResponse;
 
-	if (!response.contact) {
-		throw new NodeOperationError(this.getNode(), `Contact with ID "${contactId}" not found`, {
+	if (!response.deal) {
+		throw new NodeOperationError(this.getNode(), `Deal with ID "${dealId}" not found`, {
 			itemIndex,
 		});
 	}
 
-	const contact = response.contact as IDataObject;
+	const deal = response.deal as IDataObject;
 	const result: INodeExecutionData = {
-		json: contact,
+		json: deal,
 		pairedItem: { item: itemIndex },
 	};
 
@@ -48,3 +49,20 @@ export async function getContact(
 
 	return result;
 }
+
+export const getDealProperties: INodeProperties[] = [
+	{
+		displayName: 'ID',
+		name: 'dealId',
+		type: 'string',
+		displayOptions: {
+			show: {
+				operation: ['get'],
+				resource: ['deal'],
+			},
+		},
+		default: '',
+		required: true,
+		description: 'The unique identifier (UUID) of the deal to retrieve',
+	},
+];

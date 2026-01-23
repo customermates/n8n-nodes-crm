@@ -1,4 +1,10 @@
 export { loadUserOptions } from './loadUserOptions';
 export { loadOrganizationOptions } from './loadOrganizationOptions';
 export { loadDealOptions } from './loadDealOptions';
+export { loadContactOptions } from './loadContactOptions';
+export { loadServiceOptions } from './loadServiceOptions';
 export { loadContactCustomColumnOptions } from './loadContactCustomColumnOptions';
+export { loadOrganizationCustomColumnOptions } from './loadOrganizationCustomColumnOptions';
+export { loadDealCustomColumnOptions } from './loadDealCustomColumnOptions';
+export { loadServiceCustomColumnOptions } from './loadServiceCustomColumnOptions';
+export { loadTaskCustomColumnOptions } from './loadTaskCustomColumnOptions';

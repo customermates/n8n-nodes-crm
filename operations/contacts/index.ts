@@ -1,5 +1,5 @@
-export { createContact } from './create';
-export { deleteContact } from './delete';
-export { getContact } from './get';
-export { getAllContacts } from './getAll';
-export { updateContact } from './update';
+export { createContact, createContactProperties } from './createContact';
+export { deleteContact, deleteContactProperties } from './deleteContact';
+export { getContact, getContactProperties } from './getContact';
+export { getAllContacts, getAllContactsProperties } from './getAllContacts';
+export { updateContact, updateContactProperties } from './updateContact';

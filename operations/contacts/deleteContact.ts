@@ -2,9 +2,13 @@ import type {
 	IExecuteFunctions,
 	ICredentialDataDecryptedObject,
 	INodeExecutionData,
+	INodeProperties,
 } from 'n8n-workflow';
 import { BASE_URL } from '../../constants';
 import type { paths } from '../../lib/generated/types';
+
+type DeleteResponse =
+	paths['/v1/contacts/{id}']['delete']['responses']['200']['content']['application/json'];
 
 export async function deleteContact(
 	this: IExecuteFunctions,
@@ -12,9 +16,6 @@ export async function deleteContact(
 	credentials: ICredentialDataDecryptedObject,
 ): Promise<INodeExecutionData> {
 	const contactId = this.getNodeParameter('contactId', itemIndex) as string;
-
-	type DeleteResponse =
-		paths['/v1/contacts/{id}']['delete']['responses']['200']['content']['application/json'];
 
 	const id = (await this.helpers.httpRequest({
 		method: 'DELETE',
@@ -31,3 +32,20 @@ export async function deleteContact(
 		pairedItem: { item: itemIndex },
 	};
 }
+
+export const deleteContactProperties: INodeProperties[] = [
+	{
+		displayName: 'ID',
+		name: 'contactId',
+		type: 'string',
+		displayOptions: {
+			show: {
+				operation: ['delete'],
+				resource: ['contact'],
+			},
+		},
+		default: '',
+		required: true,
+		description: 'The unique identifier (UUID) of the contact to delete',
+	},
+];
