@@ -20,59 +20,71 @@ export async function getAllOrganizations(
 	credentials: ICredentialDataDecryptedObject,
 ): Promise<INodeExecutionData[]> {
 	const returnAll = this.getNodeParameter('returnAll', itemIndex) as boolean;
+	const requestedLimit = returnAll ? Number.POSITIVE_INFINITY : (this.getNodeParameter('limit', itemIndex) as number);
 	const additionalFields = this.getNodeParameter('additionalFields', itemIndex, {}) as {
 		searchTerm?: string;
 		sortBy?: string;
 		sortDirection?: 'asc' | 'desc';
 	};
-
-	const limit = returnAll
-		? 1000
-		: (this.getNodeParameter('limit', itemIndex) as 1000 | 25 | 5 | 10 | 100);
-	const body: SearchRequest = {
-		pagination: {
-			page: 1,
-			pageSize: limit,
-		},
-	};
-
-	if (additionalFields.searchTerm) {
-		body.searchTerm = additionalFields.searchTerm;
-	}
-
-	if (additionalFields.sortBy) {
-		body.sortDescriptor = {
-			field: additionalFields.sortBy,
-			direction: additionalFields.sortDirection || 'asc',
-		};
-	}
-
-	const response = (await this.helpers.httpRequest({
-		method: 'POST',
-		url: `${BASE_URL}/api/v1/organizations/search`,
-		headers: {
-			'x-api-key': credentials.apiKey as string,
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
-		},
-		body,
-		json: true,
-	})) as SearchResponse;
-
+	const pageSize: 5 | 10 | 25 | 100 = 100;
 	const results: INodeExecutionData[] = [];
-	for (const organization of response.items) {
-		const result: INodeExecutionData = {
-			json: organization as IDataObject,
-			pairedItem: { item: itemIndex },
+	let page = 1;
+
+	while (results.length < requestedLimit) {
+		const body: SearchRequest = {
+			pagination: {
+				page,
+				pageSize,
+			},
 		};
 
-		if (response.customColumns) {
-			result.json._meta = {
-				customColumns: response.customColumns,
+		if (additionalFields.searchTerm) {
+			body.searchTerm = additionalFields.searchTerm;
+		}
+
+		if (additionalFields.sortBy) {
+			body.sortDescriptor = {
+				field: additionalFields.sortBy,
+				direction: additionalFields.sortDirection || 'asc',
 			};
 		}
 
-		results.push(result);
+		const response = (await this.helpers.httpRequest({
+			method: 'POST',
+			url: `${BASE_URL}/api/v1/organizations/search`,
+			headers: {
+				'x-api-key': credentials.apiKey as string,
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
+			body,
+			json: true,
+		})) as SearchResponse;
+
+		for (const organization of response.items) {
+			if (results.length >= requestedLimit) {
+				break;
+			}
+
+			const result: INodeExecutionData = {
+				json: organization as IDataObject,
+				pairedItem: { item: itemIndex },
+			};
+
+			if (response.customColumns) {
+				result.json._meta = {
+					customColumns: response.customColumns,
+				};
+			}
+
+			results.push(result);
+		}
+
+		if (response.items.length < pageSize) {
+			break;
+		}
+
+		page += 1;
 	}
 
 	return results;

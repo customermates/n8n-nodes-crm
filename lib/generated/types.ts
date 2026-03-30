@@ -24,6 +24,34 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/contacts/many": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Update many contacts
+         * @description Updates many contacts in a single request. Each contact requires an ID. All other fields are optional.
+         */
+        put: operations["updateManyContacts"];
+        /**
+         * Create many contacts
+         * @description Creates many contacts in a single request. Each contact requires first name and last name. All other fields are optional.
+         */
+        post: operations["createManyContacts"];
+        /**
+         * Delete many contacts
+         * @description Deletes many contacts by their IDs in a single request. This operation cannot be undone.
+         */
+        delete: operations["deleteManyContacts"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/contacts/search": {
         parameters: {
             query?: never;
@@ -78,7 +106,7 @@ export interface paths {
         get: operations["getContactById"];
         /**
          * Update a contact
-         * @description Updates an existing contact. Only provided fields are updated. Undefined fields remain unchanged. Set array fields (organizationIds, userIds, dealIds) or customFieldValues to null to clear all existing values.
+         * @description Updates an existing contact. Only provided fields are updated. Set fields to null to clear them.
          */
         put: operations["updateContact"];
         post?: never;
@@ -107,6 +135,34 @@ export interface paths {
          */
         post: operations["createOrganization"];
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/organizations/many": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Update many organizations
+         * @description Updates many organizations in a single request. Each organization requires an ID. All other fields are optional.
+         */
+        put: operations["updateManyOrganizations"];
+        /**
+         * Create many organizations
+         * @description Creates many organizations in a single request. Each organization requires a name. All other fields are optional.
+         */
+        post: operations["createManyOrganizations"];
+        /**
+         * Delete many organizations
+         * @description Deletes many organizations by their IDs in a single request. This operation cannot be undone.
+         */
+        delete: operations["deleteManyOrganizations"];
         options?: never;
         head?: never;
         patch?: never;
@@ -166,7 +222,7 @@ export interface paths {
         get: operations["getOrganizationById"];
         /**
          * Update an organization
-         * @description Updates an existing organization. Only provided fields are updated. Undefined fields remain unchanged. Set array fields (contactIds, userIds, dealIds) or customFieldValues to null to clear all existing values.
+         * @description Updates an existing organization. Only provided fields are updated. Set fields to null to clear them.
          */
         put: operations["updateOrganization"];
         post?: never;
@@ -195,6 +251,34 @@ export interface paths {
          */
         post: operations["createDeal"];
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/deals/many": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Update many deals
+         * @description Updates many deals in a single request. Each deal requires an ID. All other fields are optional. You can update services by providing a services array with serviceId and quantity.
+         */
+        put: operations["updateManyDeals"];
+        /**
+         * Create many deals
+         * @description Creates many deals in a single request. Each deal requires a name. All other fields are optional. Deals can include services with quantities using the services array.
+         */
+        post: operations["createManyDeals"];
+        /**
+         * Delete many deals
+         * @description Deletes many deals by their IDs in a single request. This operation cannot be undone.
+         */
+        delete: operations["deleteManyDeals"];
         options?: never;
         head?: never;
         patch?: never;
@@ -254,7 +338,7 @@ export interface paths {
         get: operations["getDealById"];
         /**
          * Update a deal
-         * @description Updates an existing deal. Only provided fields are updated. Undefined fields remain unchanged. Set array fields (organizationIds, userIds, contactIds), services, or customFieldValues to null to clear all existing values.
+         * @description Updates an existing deal. Only provided fields are updated. Set fields to null to clear them.
          */
         put: operations["updateDeal"];
         post?: never;
@@ -283,6 +367,34 @@ export interface paths {
          */
         post: operations["createService"];
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/services/many": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Update many services
+         * @description Updates many services in a single request. Each service requires an ID. All other fields are optional.
+         */
+        put: operations["updateManyServices"];
+        /**
+         * Create many services
+         * @description Creates many services in a single request. Each service requires a name and an amount (must be greater than 0). All other fields are optional.
+         */
+        post: operations["createManyServices"];
+        /**
+         * Delete many services
+         * @description Deletes many services by their IDs in a single request. This operation cannot be undone.
+         */
+        delete: operations["deleteManyServices"];
         options?: never;
         head?: never;
         patch?: never;
@@ -342,7 +454,7 @@ export interface paths {
         get: operations["getServiceById"];
         /**
          * Update a service
-         * @description Updates an existing service. Only provided fields are updated. Undefined fields remain unchanged. Set array fields (userIds, dealIds) or customFieldValues to null to clear all existing values.
+         * @description Updates an existing service. Only provided fields are updated. Set fields to null to clear them.
          */
         put: operations["updateService"];
         post?: never;
@@ -371,6 +483,34 @@ export interface paths {
          */
         post: operations["createTask"];
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tasks/many": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Update many tasks
+         * @description Updates many tasks in a single request. Each task requires an ID. All other fields are optional.
+         */
+        put: operations["updateManyTasks"];
+        /**
+         * Create many tasks
+         * @description Creates many tasks in a single request. Each task requires a name. All other fields are optional.
+         */
+        post: operations["createManyTasks"];
+        /**
+         * Delete many tasks
+         * @description Deletes many tasks by their IDs in a single request. This operation cannot be undone.
+         */
+        delete: operations["deleteManyTasks"];
         options?: never;
         head?: never;
         patch?: never;
@@ -430,7 +570,7 @@ export interface paths {
         get: operations["getTaskById"];
         /**
          * Update a task
-         * @description Updates an existing task. Only provided fields are updated. Undefined fields remain unchanged. Set array fields (userIds) or customFieldValues to null to clear all existing values.
+         * @description Updates an existing task. Only provided fields are updated. Set fields to null to clear them.
          */
         put: operations["updateTask"];
         post?: never;
@@ -789,45 +929,128 @@ export interface webhooks {
 }
 export interface components {
     schemas: {
+        DeleteManyContactsSchema: {
+            ids: string[];
+        };
         CreateContactSchema: {
             firstName: string;
             lastName: string;
+            /** @description Markdown content */
+            notes?: unknown | null;
             /** @default [] */
             organizationIds: string[];
             /** @default [] */
             userIds: string[];
             /** @default [] */
             dealIds: string[];
-            /**
-             * @description Custom field values for this contact. Query available custom field configurations via GET /v1/contacts/configuration, which returns customColumns with their definitions.
-             * @default []
-             */
+            /** @default [] */
             customFieldValues: {
                 /** Format: uuid */
                 columnId: string;
                 value?: string | null;
             }[];
         };
+        CreateManyContactsSchema: {
+            contacts: {
+                firstName: string;
+                lastName: string;
+                /** @description Markdown content */
+                notes?: unknown | null;
+                /** @default [] */
+                organizationIds: string[];
+                /** @default [] */
+                userIds: string[];
+                /** @default [] */
+                dealIds: string[];
+                /** @default [] */
+                customFieldValues: {
+                    /** Format: uuid */
+                    columnId: string;
+                    value?: string | null;
+                }[];
+            }[];
+        };
+        UpdateManyContactsSchema: {
+            contacts: {
+                /** Format: uuid */
+                id: string;
+                firstName?: string;
+                lastName?: string;
+                /** @description Markdown content */
+                notes?: unknown | null;
+                organizationIds?: string[] | null;
+                userIds?: string[] | null;
+                dealIds?: string[] | null;
+                customFieldValues?: {
+                    /** Format: uuid */
+                    columnId: string;
+                    value?: string | null;
+                }[] | null;
+            }[];
+        };
+        DeleteManyOrganizationsSchema: {
+            ids: string[];
+        };
         CreateOrganizationSchema: {
             name: string;
+            /** @description Markdown content */
+            notes?: unknown | null;
             /** @default [] */
             contactIds: string[];
             /** @default [] */
             userIds: string[];
             /** @default [] */
             dealIds: string[];
-            /**
-             * @description Custom field values for this organization. Query available custom field configurations via GET /v1/organizations/configuration, which returns customColumns with their definitions.
-             * @default []
-             */
+            /** @default [] */
             customFieldValues: {
                 /** Format: uuid */
                 columnId: string;
                 value?: string | null;
             }[];
         };
+        CreateManyOrganizationsSchema: {
+            organizations: {
+                name: string;
+                /** @description Markdown content */
+                notes?: unknown | null;
+                /** @default [] */
+                contactIds: string[];
+                /** @default [] */
+                userIds: string[];
+                /** @default [] */
+                dealIds: string[];
+                /** @default [] */
+                customFieldValues: {
+                    /** Format: uuid */
+                    columnId: string;
+                    value?: string | null;
+                }[];
+            }[];
+        };
+        UpdateManyOrganizationsSchema: {
+            organizations: {
+                /** Format: uuid */
+                id: string;
+                name?: string;
+                /** @description Markdown content */
+                notes?: unknown | null;
+                contactIds?: string[] | null;
+                userIds?: string[] | null;
+                dealIds?: string[] | null;
+                customFieldValues?: {
+                    /** Format: uuid */
+                    columnId: string;
+                    value?: string | null;
+                }[] | null;
+            }[];
+        };
+        DeleteManyDealsSchema: {
+            ids: string[];
+        };
         CreateDealSchema: {
             name: string;
+            /** @description Markdown content */
+            notes?: unknown | null;
             /** @default [] */
             organizationIds: string[];
             /** @default [] */
@@ -841,45 +1064,160 @@ export interface components {
                 /** @default 1 */
                 quantity: number;
             }[];
-            /**
-             * @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions.
-             * @default []
-             */
+            /** @default [] */
             customFieldValues: {
                 /** Format: uuid */
                 columnId: string;
                 value?: string | null;
             }[];
+        };
+        CreateManyDealsSchema: {
+            deals: {
+                name: string;
+                /** @description Markdown content */
+                notes?: unknown | null;
+                /** @default [] */
+                organizationIds: string[];
+                /** @default [] */
+                userIds: string[];
+                /** @default [] */
+                contactIds: string[];
+                /** @default [] */
+                services: {
+                    /** Format: uuid */
+                    serviceId: string;
+                    /** @default 1 */
+                    quantity: number;
+                }[];
+                /** @default [] */
+                customFieldValues: {
+                    /** Format: uuid */
+                    columnId: string;
+                    value?: string | null;
+                }[];
+            }[];
+        };
+        UpdateManyDealsSchema: {
+            deals: {
+                /** Format: uuid */
+                id: string;
+                name?: string;
+                /** @description Markdown content */
+                notes?: unknown | null;
+                organizationIds?: string[] | null;
+                userIds?: string[] | null;
+                contactIds?: string[] | null;
+                services?: {
+                    /** Format: uuid */
+                    serviceId: string;
+                    /** @default 1 */
+                    quantity: number;
+                }[] | null;
+                customFieldValues?: {
+                    /** Format: uuid */
+                    columnId: string;
+                    value?: string | null;
+                }[] | null;
+            }[];
+        };
+        DeleteManyServicesSchema: {
+            ids: string[];
         };
         CreateServiceSchema: {
             name: string;
             amount: number;
+            /** @description Markdown content */
+            notes?: unknown | null;
             /** @default [] */
             userIds: string[];
             /** @default [] */
             dealIds: string[];
-            /**
-             * @description Custom field values for this service. Query available custom field configurations via GET /v1/services/configuration, which returns customColumns with their definitions.
-             * @default []
-             */
+            /** @default [] */
             customFieldValues: {
                 /** Format: uuid */
                 columnId: string;
                 value?: string | null;
             }[];
         };
+        CreateManyServicesSchema: {
+            services: {
+                name: string;
+                amount: number;
+                /** @description Markdown content */
+                notes?: unknown | null;
+                /** @default [] */
+                userIds: string[];
+                /** @default [] */
+                dealIds: string[];
+                /** @default [] */
+                customFieldValues: {
+                    /** Format: uuid */
+                    columnId: string;
+                    value?: string | null;
+                }[];
+            }[];
+        };
+        UpdateManyServicesSchema: {
+            services: {
+                /** Format: uuid */
+                id: string;
+                name?: string;
+                amount?: number;
+                /** @description Markdown content */
+                notes?: unknown | null;
+                userIds?: string[] | null;
+                dealIds?: string[] | null;
+                customFieldValues?: {
+                    /** Format: uuid */
+                    columnId: string;
+                    value?: string | null;
+                }[] | null;
+            }[];
+        };
+        DeleteManyTasksSchema: {
+            ids: string[];
+        };
         CreateTaskSchema: {
             name: string;
+            /** @description Markdown content */
+            notes?: unknown | null;
             /** @default [] */
             userIds: string[];
-            /**
-             * @description Custom field values for this task. Query available custom field configurations via GET /v1/tasks/configuration, which returns customColumns with their definitions.
-             * @default []
-             */
+            /** @default [] */
             customFieldValues: {
                 /** Format: uuid */
                 columnId: string;
                 value?: string | null;
+            }[];
+        };
+        CreateManyTasksSchema: {
+            tasks: {
+                name: string;
+                /** @description Markdown content */
+                notes?: unknown | null;
+                /** @default [] */
+                userIds: string[];
+                /** @default [] */
+                customFieldValues: {
+                    /** Format: uuid */
+                    columnId: string;
+                    value?: string | null;
+                }[];
+            }[];
+        };
+        UpdateManyTasksSchema: {
+            tasks: {
+                /** Format: uuid */
+                id: string;
+                name?: string;
+                /** @description Markdown content */
+                notes?: unknown | null;
+                userIds?: string[] | null;
+                customFieldValues?: {
+                    /** Format: uuid */
+                    columnId: string;
+                    value?: string | null;
+                }[] | null;
             }[];
         };
         WebhookContactCreatedSchema: {
@@ -890,11 +1228,15 @@ export interface components {
                 userId: string;
                 /** Format: uuid */
                 companyId: string;
+                /** Format: uuid */
+                entityId: string;
                 payload: {
                     /** Format: uuid */
                     id: string;
                     firstName: string;
                     lastName: string;
+                    /** @description Markdown content */
+                    notes?: unknown | null;
                     createdAt: string;
                     updatedAt: string;
                     organizations: {
@@ -934,12 +1276,16 @@ export interface components {
                 userId: string;
                 /** Format: uuid */
                 companyId: string;
+                /** Format: uuid */
+                entityId: string;
                 payload: {
                     contact: {
                         /** Format: uuid */
                         id: string;
                         firstName: string;
                         lastName: string;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
                         createdAt: string;
                         updatedAt: string;
                         organizations: {
@@ -969,9 +1315,77 @@ export interface components {
                         }[];
                     };
                     changes: {
-                        [key: string]: {
-                            previous: unknown;
-                            current: unknown;
+                        firstName?: {
+                            previous: string;
+                            current: string;
+                        };
+                        lastName?: {
+                            previous: string;
+                            current: string;
+                        };
+                        createdAt?: {
+                            previous: string;
+                            current: string;
+                        };
+                        updatedAt?: {
+                            previous: string;
+                            current: string;
+                        };
+                        organizations?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                        };
+                        users?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                                avatarUrl: string | null;
+                                /** Format: email */
+                                email: string;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                                avatarUrl: string | null;
+                                /** Format: email */
+                                email: string;
+                            }[];
+                        };
+                        deals?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                        };
+                        customFieldValues?: {
+                            previous: {
+                                /** Format: uuid */
+                                columnId: string;
+                                value?: string | null;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                columnId: string;
+                                value?: string | null;
+                            }[];
                         };
                     };
                 };
@@ -986,11 +1400,15 @@ export interface components {
                 userId: string;
                 /** Format: uuid */
                 companyId: string;
+                /** Format: uuid */
+                entityId: string;
                 payload: {
                     /** Format: uuid */
                     id: string;
                     firstName: string;
                     lastName: string;
+                    /** @description Markdown content */
+                    notes?: unknown | null;
                     createdAt: string;
                     updatedAt: string;
                     organizations: {
@@ -1030,10 +1448,14 @@ export interface components {
                 userId: string;
                 /** Format: uuid */
                 companyId: string;
+                /** Format: uuid */
+                entityId: string;
                 payload: {
                     /** Format: uuid */
                     id: string;
                     name: string;
+                    /** @description Markdown content */
+                    notes?: unknown | null;
                     createdAt: string;
                     updatedAt: string;
                     contacts: {
@@ -1074,11 +1496,15 @@ export interface components {
                 userId: string;
                 /** Format: uuid */
                 companyId: string;
+                /** Format: uuid */
+                entityId: string;
                 payload: {
                     organization: {
                         /** Format: uuid */
                         id: string;
                         name: string;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
                         createdAt: string;
                         updatedAt: string;
                         contacts: {
@@ -1109,9 +1535,75 @@ export interface components {
                         }[];
                     };
                     changes: {
-                        [key: string]: {
-                            previous: unknown;
-                            current: unknown;
+                        name?: {
+                            previous: string;
+                            current: string;
+                        };
+                        createdAt?: {
+                            previous: string;
+                            current: string;
+                        };
+                        updatedAt?: {
+                            previous: string;
+                            current: string;
+                        };
+                        contacts?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                            }[];
+                        };
+                        users?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                                avatarUrl: string | null;
+                                /** Format: email */
+                                email: string;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                                avatarUrl: string | null;
+                                /** Format: email */
+                                email: string;
+                            }[];
+                        };
+                        deals?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                        };
+                        customFieldValues?: {
+                            previous: {
+                                /** Format: uuid */
+                                columnId: string;
+                                value?: string | null;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                columnId: string;
+                                value?: string | null;
+                            }[];
                         };
                     };
                 };
@@ -1126,10 +1618,14 @@ export interface components {
                 userId: string;
                 /** Format: uuid */
                 companyId: string;
+                /** Format: uuid */
+                entityId: string;
                 payload: {
                     /** Format: uuid */
                     id: string;
                     name: string;
+                    /** @description Markdown content */
+                    notes?: unknown | null;
                     createdAt: string;
                     updatedAt: string;
                     contacts: {
@@ -1170,12 +1666,16 @@ export interface components {
                 userId: string;
                 /** Format: uuid */
                 companyId: string;
+                /** Format: uuid */
+                entityId: string;
                 payload: {
                     /** Format: uuid */
                     id: string;
                     name: string;
                     totalValue: number;
                     totalQuantity: number;
+                    /** @description Markdown content */
+                    notes?: unknown | null;
                     createdAt: string;
                     updatedAt: string;
                     organizations: {
@@ -1203,10 +1703,6 @@ export interface components {
                         id: string;
                         name: string;
                         amount: number;
-                    }[];
-                    servicesWithQuantity: {
-                        /** Format: uuid */
-                        serviceId: string;
                         quantity: number;
                     }[];
                     /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
@@ -1227,6 +1723,8 @@ export interface components {
                 userId: string;
                 /** Format: uuid */
                 companyId: string;
+                /** Format: uuid */
+                entityId: string;
                 payload: {
                     deal: {
                         /** Format: uuid */
@@ -1234,6 +1732,8 @@ export interface components {
                         name: string;
                         totalValue: number;
                         totalQuantity: number;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
                         createdAt: string;
                         updatedAt: string;
                         organizations: {
@@ -1261,10 +1761,6 @@ export interface components {
                             id: string;
                             name: string;
                             amount: number;
-                        }[];
-                        servicesWithQuantity: {
-                            /** Format: uuid */
-                            serviceId: string;
                             quantity: number;
                         }[];
                         /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
@@ -1275,9 +1771,99 @@ export interface components {
                         }[];
                     };
                     changes: {
-                        [key: string]: {
-                            previous: unknown;
-                            current: unknown;
+                        name?: {
+                            previous: string;
+                            current: string;
+                        };
+                        totalValue?: {
+                            previous: number;
+                            current: number;
+                        };
+                        totalQuantity?: {
+                            previous: number;
+                            current: number;
+                        };
+                        createdAt?: {
+                            previous: string;
+                            current: string;
+                        };
+                        updatedAt?: {
+                            previous: string;
+                            current: string;
+                        };
+                        organizations?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                        };
+                        users?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                                avatarUrl: string | null;
+                                /** Format: email */
+                                email: string;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                                avatarUrl: string | null;
+                                /** Format: email */
+                                email: string;
+                            }[];
+                        };
+                        contacts?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                            }[];
+                        };
+                        services?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                amount: number;
+                                quantity: number;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                amount: number;
+                                quantity: number;
+                            }[];
+                        };
+                        customFieldValues?: {
+                            previous: {
+                                /** Format: uuid */
+                                columnId: string;
+                                value?: string | null;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                columnId: string;
+                                value?: string | null;
+                            }[];
                         };
                     };
                 };
@@ -1292,12 +1878,16 @@ export interface components {
                 userId: string;
                 /** Format: uuid */
                 companyId: string;
+                /** Format: uuid */
+                entityId: string;
                 payload: {
                     /** Format: uuid */
                     id: string;
                     name: string;
                     totalValue: number;
                     totalQuantity: number;
+                    /** @description Markdown content */
+                    notes?: unknown | null;
                     createdAt: string;
                     updatedAt: string;
                     organizations: {
@@ -1325,10 +1915,6 @@ export interface components {
                         id: string;
                         name: string;
                         amount: number;
-                    }[];
-                    servicesWithQuantity: {
-                        /** Format: uuid */
-                        serviceId: string;
                         quantity: number;
                     }[];
                     /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
@@ -1349,11 +1935,15 @@ export interface components {
                 userId: string;
                 /** Format: uuid */
                 companyId: string;
+                /** Format: uuid */
+                entityId: string;
                 payload: {
                     /** Format: uuid */
                     id: string;
                     name: string;
                     amount: number;
+                    /** @description Markdown content */
+                    notes?: unknown | null;
                     createdAt: string;
                     updatedAt: string;
                     users: {
@@ -1388,12 +1978,16 @@ export interface components {
                 userId: string;
                 /** Format: uuid */
                 companyId: string;
+                /** Format: uuid */
+                entityId: string;
                 payload: {
                     service: {
                         /** Format: uuid */
                         id: string;
                         name: string;
                         amount: number;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
                         createdAt: string;
                         updatedAt: string;
                         users: {
@@ -1418,9 +2012,65 @@ export interface components {
                         }[];
                     };
                     changes: {
-                        [key: string]: {
-                            previous: unknown;
-                            current: unknown;
+                        name?: {
+                            previous: string;
+                            current: string;
+                        };
+                        amount?: {
+                            previous: number;
+                            current: number;
+                        };
+                        createdAt?: {
+                            previous: string;
+                            current: string;
+                        };
+                        updatedAt?: {
+                            previous: string;
+                            current: string;
+                        };
+                        users?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                                avatarUrl: string | null;
+                                /** Format: email */
+                                email: string;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                                avatarUrl: string | null;
+                                /** Format: email */
+                                email: string;
+                            }[];
+                        };
+                        deals?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                        };
+                        customFieldValues?: {
+                            previous: {
+                                /** Format: uuid */
+                                columnId: string;
+                                value?: string | null;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                columnId: string;
+                                value?: string | null;
+                            }[];
                         };
                     };
                 };
@@ -1435,11 +2085,15 @@ export interface components {
                 userId: string;
                 /** Format: uuid */
                 companyId: string;
+                /** Format: uuid */
+                entityId: string;
                 payload: {
                     /** Format: uuid */
                     id: string;
                     name: string;
                     amount: number;
+                    /** @description Markdown content */
+                    notes?: unknown | null;
                     createdAt: string;
                     updatedAt: string;
                     users: {
@@ -1474,11 +2128,16 @@ export interface components {
                 userId: string;
                 /** Format: uuid */
                 companyId: string;
+                /** Format: uuid */
+                entityId: string;
                 payload: {
                     /** Format: uuid */
                     id: string;
                     name: string;
-                    type: string;
+                    /** @enum {string} */
+                    type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                    /** @description Markdown content */
+                    notes?: unknown | null;
                     createdAt: string;
                     updatedAt: string;
                     users: {
@@ -1508,12 +2167,17 @@ export interface components {
                 userId: string;
                 /** Format: uuid */
                 companyId: string;
+                /** Format: uuid */
+                entityId: string;
                 payload: {
                     task: {
                         /** Format: uuid */
                         id: string;
                         name: string;
-                        type: string;
+                        /** @enum {string} */
+                        type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                        /** @description Markdown content */
+                        notes?: unknown | null;
                         createdAt: string;
                         updatedAt: string;
                         users: {
@@ -1533,9 +2197,49 @@ export interface components {
                         }[];
                     };
                     changes: {
-                        [key: string]: {
-                            previous: unknown;
-                            current: unknown;
+                        name?: {
+                            previous: string;
+                            current: string;
+                        };
+                        createdAt?: {
+                            previous: string;
+                            current: string;
+                        };
+                        updatedAt?: {
+                            previous: string;
+                            current: string;
+                        };
+                        users?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                                avatarUrl: string | null;
+                                /** Format: email */
+                                email: string;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                                avatarUrl: string | null;
+                                /** Format: email */
+                                email: string;
+                            }[];
+                        };
+                        customFieldValues?: {
+                            previous: {
+                                /** Format: uuid */
+                                columnId: string;
+                                value?: string | null;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                columnId: string;
+                                value?: string | null;
+                            }[];
                         };
                     };
                 };
@@ -1550,11 +2254,16 @@ export interface components {
                 userId: string;
                 /** Format: uuid */
                 companyId: string;
+                /** Format: uuid */
+                entityId: string;
                 payload: {
                     /** Format: uuid */
                     id: string;
                     name: string;
-                    type: string;
+                    /** @enum {string} */
+                    type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                    /** @description Markdown content */
+                    notes?: unknown | null;
                     createdAt: string;
                     updatedAt: string;
                     users: {
@@ -1584,10 +2293,11 @@ export interface components {
             email: string;
             firstName: string;
             lastName: string;
+            roleId: string | null;
             /** @enum {string} */
             status: "active" | "inactive" | "pendingAuthorization";
             /** @enum {string} */
-            country: "af" | "ao" | "al" | "ad" | "ae" | "ar" | "am" | "ag" | "au" | "at" | "az" | "bi" | "be" | "bj" | "bf" | "bd" | "bg" | "bh" | "bs" | "ba" | "by" | "bz" | "bo" | "br" | "bb" | "bn" | "bt" | "bw" | "cf" | "ca" | "ch" | "cl" | "cn" | "ci" | "cm" | "cd" | "cg" | "co" | "km" | "cv" | "cr" | "cu" | "cy" | "cz" | "de" | "dj" | "dm" | "dk" | "do" | "dz" | "ec" | "eg" | "er" | "es" | "ee" | "et" | "fi" | "fj" | "fr" | "fm" | "ga" | "gb" | "ge" | "gh" | "gn" | "gm" | "gw" | "gq" | "gr" | "gd" | "gt" | "gy" | "hn" | "hr" | "ht" | "hu" | "id" | "in" | "ie" | "ir" | "iq" | "is" | "il" | "it" | "jm" | "jo" | "jp";
+            country: "af" | "ao" | "al" | "ad" | "ae" | "ar" | "am" | "ag" | "au" | "at" | "az" | "bi" | "be" | "bj" | "bf" | "bd" | "bg" | "bh" | "bs" | "ba" | "by" | "bz" | "bo" | "br" | "bb" | "bn" | "bt" | "bw" | "cf" | "ca" | "ch" | "cl" | "cn" | "ci" | "cm" | "cd" | "cg" | "co" | "km" | "cv" | "cr" | "cu" | "cy" | "cz" | "de" | "dj" | "dm" | "dk" | "do" | "dz" | "ec" | "eg" | "er" | "es" | "ee" | "et" | "fi" | "fj" | "fr" | "fm" | "ga" | "gb" | "ge" | "gh" | "gn" | "gm" | "gw" | "gq" | "gr" | "gd" | "gt" | "gy" | "hn" | "hr" | "ht" | "hu" | "id" | "in" | "ie" | "ir" | "iq" | "is" | "il" | "it" | "jm" | "jo" | "jp" | "ke" | "kg" | "kh" | "ki" | "kn" | "kp" | "kr" | "kw" | "kz" | "la" | "lb" | "lc" | "li" | "lk" | "lr" | "ls" | "lt" | "lu" | "lv" | "ly" | "ma" | "mc" | "md" | "me" | "mg" | "mh" | "mk" | "ml" | "mm" | "mn" | "mr" | "mt" | "mu" | "mv" | "mw" | "mx" | "my" | "mz" | "na" | "ne" | "ng" | "ni" | "nl" | "no" | "np" | "nr" | "nz" | "om" | "pa" | "pe" | "pg" | "ph" | "pk" | "pl" | "pt" | "pw" | "py" | "qa" | "ro" | "rs" | "ru" | "rw" | "sa" | "sb" | "sc" | "sd" | "se" | "sg" | "si" | "sk" | "sl" | "sm" | "sn" | "so" | "sr" | "ss" | "st" | "sv" | "sy" | "sz" | "td" | "tg" | "th" | "tj" | "tl" | "tm" | "tn" | "to" | "tr" | "tt" | "tv" | "tz" | "ua" | "ug" | "us" | "uy" | "uz" | "va" | "vc" | "ve" | "vn" | "vu" | "ws" | "ye" | "za" | "zm" | "zw";
             avatarUrl: string | null;
             createdAt: string;
             updatedAt: string;
@@ -1601,10 +2311,11 @@ export interface components {
             id: string;
             firstName?: string;
             lastName?: string;
+            /** @description Markdown content */
+            notes?: unknown | null;
             organizationIds?: string[] | null;
             userIds?: string[] | null;
             dealIds?: string[] | null;
-            /** @description Custom field values for this contact. Query available custom field configurations via GET /v1/contacts/configuration, which returns customColumns with their definitions. If undefined, custom field values are not updated. If null or empty array, all custom field values will be cleared. */
             customFieldValues?: {
                 /** Format: uuid */
                 columnId: string;
@@ -1623,10 +2334,11 @@ export interface components {
             /** Format: uuid */
             id: string;
             name?: string;
+            /** @description Markdown content */
+            notes?: unknown | null;
             contactIds?: string[] | null;
             userIds?: string[] | null;
             dealIds?: string[] | null;
-            /** @description Custom field values for this organization. Query available custom field configurations via GET /v1/organizations/configuration, which returns customColumns with their definitions. If undefined, custom field values are not updated. If null or empty array, all custom field values will be cleared. */
             customFieldValues?: {
                 /** Format: uuid */
                 columnId: string;
@@ -1645,6 +2357,8 @@ export interface components {
             /** Format: uuid */
             id: string;
             name?: string;
+            /** @description Markdown content */
+            notes?: unknown | null;
             organizationIds?: string[] | null;
             userIds?: string[] | null;
             contactIds?: string[] | null;
@@ -1654,7 +2368,6 @@ export interface components {
                 /** @default 1 */
                 quantity: number;
             }[] | null;
-            /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. If undefined, custom field values are not updated. If null or empty array, all custom field values will be cleared. */
             customFieldValues?: {
                 /** Format: uuid */
                 columnId: string;
@@ -1674,9 +2387,10 @@ export interface components {
             id: string;
             name?: string;
             amount?: number;
+            /** @description Markdown content */
+            notes?: unknown | null;
             userIds?: string[] | null;
             dealIds?: string[] | null;
-            /** @description Custom field values for this service. Query available custom field configurations via GET /v1/services/configuration, which returns customColumns with their definitions. If undefined, custom field values are not updated. If null or empty array, all custom field values will be cleared. */
             customFieldValues?: {
                 /** Format: uuid */
                 columnId: string;
@@ -1695,8 +2409,9 @@ export interface components {
             /** Format: uuid */
             id: string;
             name?: string;
+            /** @description Markdown content */
+            notes?: unknown | null;
             userIds?: string[] | null;
-            /** @description Custom field values for this task. Query available custom field configurations via GET /v1/tasks/configuration, which returns customColumns with their definitions. If undefined, custom field values are not updated. If null or empty array, all custom field values will be cleared. */
             customFieldValues?: {
                 /** Format: uuid */
                 columnId: string;
@@ -1740,6 +2455,8 @@ export interface operations {
                         id: string;
                         firstName: string;
                         lastName: string;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
                         createdAt: string;
                         updatedAt: string;
                         organizations: {
@@ -1768,6 +2485,254 @@ export interface operations {
                             value?: string | null;
                         }[];
                     };
+                };
+            };
+            /** @description Bad Request - Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authorized */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Unexpected error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+        };
+    };
+    updateManyContacts: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["UpdateManyContactsSchema"];
+            };
+        };
+        responses: {
+            /** @description The contacts were updated successfully. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** Format: uuid */
+                        id: string;
+                        firstName: string;
+                        lastName: string;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
+                        createdAt: string;
+                        updatedAt: string;
+                        organizations: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        users: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                            avatarUrl: string | null;
+                            /** Format: email */
+                            email: string;
+                        }[];
+                        deals: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        /** @description Custom field values for this contact. Query available custom field configurations via GET /v1/contacts/configuration, which returns customColumns with their definitions. */
+                        customFieldValues: {
+                            /** Format: uuid */
+                            columnId: string;
+                            value?: string | null;
+                        }[];
+                    }[];
+                };
+            };
+            /** @description Bad Request - Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authorized */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Unexpected error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+        };
+    };
+    createManyContacts: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CreateManyContactsSchema"];
+            };
+        };
+        responses: {
+            /** @description The contacts were created successfully. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** Format: uuid */
+                        id: string;
+                        firstName: string;
+                        lastName: string;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
+                        createdAt: string;
+                        updatedAt: string;
+                        organizations: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        users: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                            avatarUrl: string | null;
+                            /** Format: email */
+                            email: string;
+                        }[];
+                        deals: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        /** @description Custom field values for this contact. Query available custom field configurations via GET /v1/contacts/configuration, which returns customColumns with their definitions. */
+                        customFieldValues: {
+                            /** Format: uuid */
+                            columnId: string;
+                            value?: string | null;
+                        }[];
+                    }[];
+                };
+            };
+            /** @description Bad Request - Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authorized */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Unexpected error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+        };
+    };
+    deleteManyContacts: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["DeleteManyContactsSchema"];
+            };
+        };
+        responses: {
+            /** @description The contacts were deleted successfully. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string[];
                 };
             };
             /** @description Bad Request - Validation error */
@@ -1838,7 +2803,7 @@ export interface operations {
                     };
                     pagination?: {
                         page: number;
-                        pageSize: 5 | 10 | 25 | 100 | 1000;
+                        pageSize: 5 | 10 | 25 | 100;
                     };
                 };
             };
@@ -1894,6 +2859,7 @@ export interface operations {
                             options: {
                                 /** @enum {string} */
                                 color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                allowMultiple: boolean;
                             };
                         } | {
                             /** Format: uuid */
@@ -1972,7 +2938,7 @@ export interface operations {
                         };
                         pagination?: {
                             page: number;
-                            pageSize: 5 | 10 | 25 | 100 | 1000;
+                            pageSize: 5 | 10 | 25 | 100;
                             totalPages?: number;
                             total?: number;
                         };
@@ -2003,6 +2969,8 @@ export interface operations {
                             id: string;
                             firstName: string;
                             lastName: string;
+                            /** @description Markdown content */
+                            notes?: unknown | null;
                             createdAt: string;
                             updatedAt: string;
                             organizations: {
@@ -2131,6 +3099,7 @@ export interface operations {
                             options: {
                                 /** @enum {string} */
                                 color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                allowMultiple: boolean;
                             };
                         } | {
                             /** Format: uuid */
@@ -2259,6 +3228,8 @@ export interface operations {
                             id: string;
                             firstName: string;
                             lastName: string;
+                            /** @description Markdown content */
+                            notes?: unknown | null;
                             createdAt: string;
                             updatedAt: string;
                             organizations: {
@@ -2330,6 +3301,7 @@ export interface operations {
                             options: {
                                 /** @enum {string} */
                                 color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                allowMultiple: boolean;
                             };
                         } | {
                             /** Format: uuid */
@@ -2443,10 +3415,11 @@ export interface operations {
                 "application/json": {
                     firstName?: string;
                     lastName?: string;
+                    /** @description Markdown content */
+                    notes?: unknown | null;
                     organizationIds?: string[] | null;
                     userIds?: string[] | null;
                     dealIds?: string[] | null;
-                    /** @description Custom field values for this contact. Query available custom field configurations via GET /v1/contacts/configuration, which returns customColumns with their definitions. If undefined, custom field values are not updated. If null or empty array, all custom field values will be cleared. */
                     customFieldValues?: {
                         /** Format: uuid */
                         columnId: string;
@@ -2467,6 +3440,8 @@ export interface operations {
                         id: string;
                         firstName: string;
                         lastName: string;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
                         createdAt: string;
                         updatedAt: string;
                         organizations: {
@@ -2616,6 +3591,8 @@ export interface operations {
                         /** Format: uuid */
                         id: string;
                         name: string;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
                         createdAt: string;
                         updatedAt: string;
                         contacts: {
@@ -2645,6 +3622,254 @@ export interface operations {
                             value?: string | null;
                         }[];
                     };
+                };
+            };
+            /** @description Bad Request - Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authorized */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Unexpected error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+        };
+    };
+    updateManyOrganizations: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["UpdateManyOrganizationsSchema"];
+            };
+        };
+        responses: {
+            /** @description The organizations were updated successfully. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
+                        createdAt: string;
+                        updatedAt: string;
+                        contacts: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                        }[];
+                        users: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                            avatarUrl: string | null;
+                            /** Format: email */
+                            email: string;
+                        }[];
+                        deals: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        /** @description Custom field values for this organization. Query available custom field configurations via GET /v1/organizations/configuration, which returns customColumns with their definitions. */
+                        customFieldValues: {
+                            /** Format: uuid */
+                            columnId: string;
+                            value?: string | null;
+                        }[];
+                    }[];
+                };
+            };
+            /** @description Bad Request - Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authorized */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Unexpected error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+        };
+    };
+    createManyOrganizations: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CreateManyOrganizationsSchema"];
+            };
+        };
+        responses: {
+            /** @description The organizations were created successfully. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
+                        createdAt: string;
+                        updatedAt: string;
+                        contacts: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                        }[];
+                        users: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                            avatarUrl: string | null;
+                            /** Format: email */
+                            email: string;
+                        }[];
+                        deals: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        /** @description Custom field values for this organization. Query available custom field configurations via GET /v1/organizations/configuration, which returns customColumns with their definitions. */
+                        customFieldValues: {
+                            /** Format: uuid */
+                            columnId: string;
+                            value?: string | null;
+                        }[];
+                    }[];
+                };
+            };
+            /** @description Bad Request - Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authorized */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Unexpected error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+        };
+    };
+    deleteManyOrganizations: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["DeleteManyOrganizationsSchema"];
+            };
+        };
+        responses: {
+            /** @description The organizations were deleted successfully. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string[];
                 };
             };
             /** @description Bad Request - Validation error */
@@ -2715,7 +3940,7 @@ export interface operations {
                     };
                     pagination?: {
                         page: number;
-                        pageSize: 5 | 10 | 25 | 100 | 1000;
+                        pageSize: 5 | 10 | 25 | 100;
                     };
                 };
             };
@@ -2771,6 +3996,7 @@ export interface operations {
                             options: {
                                 /** @enum {string} */
                                 color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                allowMultiple: boolean;
                             };
                         } | {
                             /** Format: uuid */
@@ -2849,7 +4075,7 @@ export interface operations {
                         };
                         pagination?: {
                             page: number;
-                            pageSize: 5 | 10 | 25 | 100 | 1000;
+                            pageSize: 5 | 10 | 25 | 100;
                             totalPages?: number;
                             total?: number;
                         };
@@ -2879,6 +4105,8 @@ export interface operations {
                             /** Format: uuid */
                             id: string;
                             name: string;
+                            /** @description Markdown content */
+                            notes?: unknown | null;
                             createdAt: string;
                             updatedAt: string;
                             contacts: {
@@ -3008,6 +4236,7 @@ export interface operations {
                             options: {
                                 /** @enum {string} */
                                 color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                allowMultiple: boolean;
                             };
                         } | {
                             /** Format: uuid */
@@ -3135,6 +4364,8 @@ export interface operations {
                             /** Format: uuid */
                             id: string;
                             name: string;
+                            /** @description Markdown content */
+                            notes?: unknown | null;
                             createdAt: string;
                             updatedAt: string;
                             contacts: {
@@ -3207,6 +4438,7 @@ export interface operations {
                             options: {
                                 /** @enum {string} */
                                 color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                allowMultiple: boolean;
                             };
                         } | {
                             /** Format: uuid */
@@ -3319,10 +4551,11 @@ export interface operations {
             content: {
                 "application/json": {
                     name?: string;
+                    /** @description Markdown content */
+                    notes?: unknown | null;
                     contactIds?: string[] | null;
                     userIds?: string[] | null;
                     dealIds?: string[] | null;
-                    /** @description Custom field values for this organization. Query available custom field configurations via GET /v1/organizations/configuration, which returns customColumns with their definitions. If undefined, custom field values are not updated. If null or empty array, all custom field values will be cleared. */
                     customFieldValues?: {
                         /** Format: uuid */
                         columnId: string;
@@ -3342,6 +4575,8 @@ export interface operations {
                         /** Format: uuid */
                         id: string;
                         name: string;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
                         createdAt: string;
                         updatedAt: string;
                         contacts: {
@@ -3494,6 +4729,8 @@ export interface operations {
                         name: string;
                         totalValue: number;
                         totalQuantity: number;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
                         createdAt: string;
                         updatedAt: string;
                         organizations: {
@@ -3521,10 +4758,6 @@ export interface operations {
                             id: string;
                             name: string;
                             amount: number;
-                        }[];
-                        servicesWithQuantity: {
-                            /** Format: uuid */
-                            serviceId: string;
                             quantity: number;
                         }[];
                         /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
@@ -3534,6 +4767,272 @@ export interface operations {
                             value?: string | null;
                         }[];
                     };
+                };
+            };
+            /** @description Bad Request - Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authorized */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Unexpected error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+        };
+    };
+    updateManyDeals: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["UpdateManyDealsSchema"];
+            };
+        };
+        responses: {
+            /** @description The deals were updated successfully. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        totalValue: number;
+                        totalQuantity: number;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
+                        createdAt: string;
+                        updatedAt: string;
+                        organizations: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        users: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                            avatarUrl: string | null;
+                            /** Format: email */
+                            email: string;
+                        }[];
+                        contacts: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                        }[];
+                        services: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            amount: number;
+                            quantity: number;
+                        }[];
+                        /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
+                        customFieldValues: {
+                            /** Format: uuid */
+                            columnId: string;
+                            value?: string | null;
+                        }[];
+                    }[];
+                };
+            };
+            /** @description Bad Request - Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authorized */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Unexpected error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+        };
+    };
+    createManyDeals: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CreateManyDealsSchema"];
+            };
+        };
+        responses: {
+            /** @description The deals were created successfully. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        totalValue: number;
+                        totalQuantity: number;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
+                        createdAt: string;
+                        updatedAt: string;
+                        organizations: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        users: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                            avatarUrl: string | null;
+                            /** Format: email */
+                            email: string;
+                        }[];
+                        contacts: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                        }[];
+                        services: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            amount: number;
+                            quantity: number;
+                        }[];
+                        /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
+                        customFieldValues: {
+                            /** Format: uuid */
+                            columnId: string;
+                            value?: string | null;
+                        }[];
+                    }[];
+                };
+            };
+            /** @description Bad Request - Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authorized */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Unexpected error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+        };
+    };
+    deleteManyDeals: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["DeleteManyDealsSchema"];
+            };
+        };
+        responses: {
+            /** @description The deals were deleted successfully. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string[];
                 };
             };
             /** @description Bad Request - Validation error */
@@ -3604,7 +5103,7 @@ export interface operations {
                     };
                     pagination?: {
                         page: number;
-                        pageSize: 5 | 10 | 25 | 100 | 1000;
+                        pageSize: 5 | 10 | 25 | 100;
                     };
                 };
             };
@@ -3660,6 +5159,7 @@ export interface operations {
                             options: {
                                 /** @enum {string} */
                                 color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                allowMultiple: boolean;
                             };
                         } | {
                             /** Format: uuid */
@@ -3738,7 +5238,7 @@ export interface operations {
                         };
                         pagination?: {
                             page: number;
-                            pageSize: 5 | 10 | 25 | 100 | 1000;
+                            pageSize: 5 | 10 | 25 | 100;
                             totalPages?: number;
                             total?: number;
                         };
@@ -3770,6 +5270,8 @@ export interface operations {
                             name: string;
                             totalValue: number;
                             totalQuantity: number;
+                            /** @description Markdown content */
+                            notes?: unknown | null;
                             createdAt: string;
                             updatedAt: string;
                             organizations: {
@@ -3797,10 +5299,6 @@ export interface operations {
                                 id: string;
                                 name: string;
                                 amount: number;
-                            }[];
-                            servicesWithQuantity: {
-                                /** Format: uuid */
-                                serviceId: string;
                                 quantity: number;
                             }[];
                             /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
@@ -3910,6 +5408,7 @@ export interface operations {
                             options: {
                                 /** @enum {string} */
                                 color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                allowMultiple: boolean;
                             };
                         } | {
                             /** Format: uuid */
@@ -4039,6 +5538,8 @@ export interface operations {
                             name: string;
                             totalValue: number;
                             totalQuantity: number;
+                            /** @description Markdown content */
+                            notes?: unknown | null;
                             createdAt: string;
                             updatedAt: string;
                             organizations: {
@@ -4066,10 +5567,6 @@ export interface operations {
                                 id: string;
                                 name: string;
                                 amount: number;
-                            }[];
-                            servicesWithQuantity: {
-                                /** Format: uuid */
-                                serviceId: string;
                                 quantity: number;
                             }[];
                             /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
@@ -4122,6 +5619,7 @@ export interface operations {
                             options: {
                                 /** @enum {string} */
                                 color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                allowMultiple: boolean;
                             };
                         } | {
                             /** Format: uuid */
@@ -4234,6 +5732,8 @@ export interface operations {
             content: {
                 "application/json": {
                     name?: string;
+                    /** @description Markdown content */
+                    notes?: unknown | null;
                     organizationIds?: string[] | null;
                     userIds?: string[] | null;
                     contactIds?: string[] | null;
@@ -4243,7 +5743,6 @@ export interface operations {
                         /** @default 1 */
                         quantity?: number;
                     }[] | null;
-                    /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. If undefined, custom field values are not updated. If null or empty array, all custom field values will be cleared. */
                     customFieldValues?: {
                         /** Format: uuid */
                         columnId: string;
@@ -4265,6 +5764,8 @@ export interface operations {
                         name: string;
                         totalValue: number;
                         totalQuantity: number;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
                         createdAt: string;
                         updatedAt: string;
                         organizations: {
@@ -4292,10 +5793,6 @@ export interface operations {
                             id: string;
                             name: string;
                             amount: number;
-                        }[];
-                        servicesWithQuantity: {
-                            /** Format: uuid */
-                            serviceId: string;
                             quantity: number;
                         }[];
                         /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
@@ -4427,6 +5924,8 @@ export interface operations {
                         id: string;
                         name: string;
                         amount: number;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
                         createdAt: string;
                         updatedAt: string;
                         users: {
@@ -4450,6 +5949,244 @@ export interface operations {
                             value?: string | null;
                         }[];
                     };
+                };
+            };
+            /** @description Bad Request - Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authorized */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Unexpected error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+        };
+    };
+    updateManyServices: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["UpdateManyServicesSchema"];
+            };
+        };
+        responses: {
+            /** @description The services were updated successfully. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        amount: number;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
+                        createdAt: string;
+                        updatedAt: string;
+                        users: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                            avatarUrl: string | null;
+                            /** Format: email */
+                            email: string;
+                        }[];
+                        deals: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        /** @description Custom field values for this service. Query available custom field configurations via GET /v1/services/configuration, which returns customColumns with their definitions. */
+                        customFieldValues: {
+                            /** Format: uuid */
+                            columnId: string;
+                            value?: string | null;
+                        }[];
+                    }[];
+                };
+            };
+            /** @description Bad Request - Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authorized */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Unexpected error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+        };
+    };
+    createManyServices: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CreateManyServicesSchema"];
+            };
+        };
+        responses: {
+            /** @description The services were created successfully. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        amount: number;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
+                        createdAt: string;
+                        updatedAt: string;
+                        users: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                            avatarUrl: string | null;
+                            /** Format: email */
+                            email: string;
+                        }[];
+                        deals: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        /** @description Custom field values for this service. Query available custom field configurations via GET /v1/services/configuration, which returns customColumns with their definitions. */
+                        customFieldValues: {
+                            /** Format: uuid */
+                            columnId: string;
+                            value?: string | null;
+                        }[];
+                    }[];
+                };
+            };
+            /** @description Bad Request - Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authorized */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Unexpected error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+        };
+    };
+    deleteManyServices: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["DeleteManyServicesSchema"];
+            };
+        };
+        responses: {
+            /** @description The services were deleted successfully. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string[];
                 };
             };
             /** @description Bad Request - Validation error */
@@ -4520,7 +6257,7 @@ export interface operations {
                     };
                     pagination?: {
                         page: number;
-                        pageSize: 5 | 10 | 25 | 100 | 1000;
+                        pageSize: 5 | 10 | 25 | 100;
                     };
                 };
             };
@@ -4576,6 +6313,7 @@ export interface operations {
                             options: {
                                 /** @enum {string} */
                                 color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                allowMultiple: boolean;
                             };
                         } | {
                             /** Format: uuid */
@@ -4654,7 +6392,7 @@ export interface operations {
                         };
                         pagination?: {
                             page: number;
-                            pageSize: 5 | 10 | 25 | 100 | 1000;
+                            pageSize: 5 | 10 | 25 | 100;
                             totalPages?: number;
                             total?: number;
                         };
@@ -4685,6 +6423,8 @@ export interface operations {
                             id: string;
                             name: string;
                             amount: number;
+                            /** @description Markdown content */
+                            notes?: unknown | null;
                             createdAt: string;
                             updatedAt: string;
                             users: {
@@ -4808,6 +6548,7 @@ export interface operations {
                             options: {
                                 /** @enum {string} */
                                 color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                allowMultiple: boolean;
                             };
                         } | {
                             /** Format: uuid */
@@ -4936,6 +6677,8 @@ export interface operations {
                             id: string;
                             name: string;
                             amount: number;
+                            /** @description Markdown content */
+                            notes?: unknown | null;
                             createdAt: string;
                             updatedAt: string;
                             users: {
@@ -5002,6 +6745,7 @@ export interface operations {
                             options: {
                                 /** @enum {string} */
                                 color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                allowMultiple: boolean;
                             };
                         } | {
                             /** Format: uuid */
@@ -5115,9 +6859,10 @@ export interface operations {
                 "application/json": {
                     name?: string;
                     amount?: number;
+                    /** @description Markdown content */
+                    notes?: unknown | null;
                     userIds?: string[] | null;
                     dealIds?: string[] | null;
-                    /** @description Custom field values for this service. Query available custom field configurations via GET /v1/services/configuration, which returns customColumns with their definitions. If undefined, custom field values are not updated. If null or empty array, all custom field values will be cleared. */
                     customFieldValues?: {
                         /** Format: uuid */
                         columnId: string;
@@ -5138,6 +6883,8 @@ export interface operations {
                         id: string;
                         name: string;
                         amount: number;
+                        /** @description Markdown content */
+                        notes?: unknown | null;
                         createdAt: string;
                         updatedAt: string;
                         users: {
@@ -5282,7 +7029,10 @@ export interface operations {
                         /** Format: uuid */
                         id: string;
                         name: string;
-                        type: string;
+                        /** @enum {string} */
+                        type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                        /** @description Markdown content */
+                        notes?: unknown | null;
                         createdAt: string;
                         updatedAt: string;
                         users: {
@@ -5301,6 +7051,236 @@ export interface operations {
                             value?: string | null;
                         }[];
                     };
+                };
+            };
+            /** @description Bad Request - Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authorized */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Unexpected error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+        };
+    };
+    updateManyTasks: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["UpdateManyTasksSchema"];
+            };
+        };
+        responses: {
+            /** @description The tasks were updated successfully. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        /** @enum {string} */
+                        type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                        /** @description Markdown content */
+                        notes?: unknown | null;
+                        createdAt: string;
+                        updatedAt: string;
+                        users: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                            avatarUrl: string | null;
+                            /** Format: email */
+                            email: string;
+                        }[];
+                        /** @description Custom field values for this task. Query available custom field configurations via GET /v1/tasks/configuration, which returns customColumns with their definitions. */
+                        customFieldValues: {
+                            /** Format: uuid */
+                            columnId: string;
+                            value?: string | null;
+                        }[];
+                    }[];
+                };
+            };
+            /** @description Bad Request - Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authorized */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Unexpected error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+        };
+    };
+    createManyTasks: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CreateManyTasksSchema"];
+            };
+        };
+        responses: {
+            /** @description The tasks were created successfully. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        /** @enum {string} */
+                        type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                        /** @description Markdown content */
+                        notes?: unknown | null;
+                        createdAt: string;
+                        updatedAt: string;
+                        users: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                            avatarUrl: string | null;
+                            /** Format: email */
+                            email: string;
+                        }[];
+                        /** @description Custom field values for this task. Query available custom field configurations via GET /v1/tasks/configuration, which returns customColumns with their definitions. */
+                        customFieldValues: {
+                            /** Format: uuid */
+                            columnId: string;
+                            value?: string | null;
+                        }[];
+                    }[];
+                };
+            };
+            /** @description Bad Request - Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Not authorized */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+            /** @description Unexpected error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponseSchema"];
+                };
+            };
+        };
+    };
+    deleteManyTasks: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["DeleteManyTasksSchema"];
+            };
+        };
+        responses: {
+            /** @description The tasks were deleted successfully. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string[];
                 };
             };
             /** @description Bad Request - Validation error */
@@ -5371,7 +7351,7 @@ export interface operations {
                     };
                     pagination?: {
                         page: number;
-                        pageSize: 5 | 10 | 25 | 100 | 1000;
+                        pageSize: 5 | 10 | 25 | 100;
                     };
                 };
             };
@@ -5427,6 +7407,7 @@ export interface operations {
                             options: {
                                 /** @enum {string} */
                                 color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                allowMultiple: boolean;
                             };
                         } | {
                             /** Format: uuid */
@@ -5505,7 +7486,7 @@ export interface operations {
                         };
                         pagination?: {
                             page: number;
-                            pageSize: 5 | 10 | 25 | 100 | 1000;
+                            pageSize: 5 | 10 | 25 | 100;
                             totalPages?: number;
                             total?: number;
                         };
@@ -5535,7 +7516,10 @@ export interface operations {
                             /** Format: uuid */
                             id: string;
                             name: string;
-                            type: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                            /** @description Markdown content */
+                            notes?: unknown | null;
                             createdAt: string;
                             updatedAt: string;
                             users: {
@@ -5654,6 +7638,7 @@ export interface operations {
                             options: {
                                 /** @enum {string} */
                                 color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                allowMultiple: boolean;
                             };
                         } | {
                             /** Format: uuid */
@@ -5781,7 +7766,10 @@ export interface operations {
                             /** Format: uuid */
                             id: string;
                             name: string;
-                            type: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                            /** @description Markdown content */
+                            notes?: unknown | null;
                             createdAt: string;
                             updatedAt: string;
                             users: {
@@ -5843,6 +7831,7 @@ export interface operations {
                             options: {
                                 /** @enum {string} */
                                 color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                allowMultiple: boolean;
                             };
                         } | {
                             /** Format: uuid */
@@ -5955,8 +7944,9 @@ export interface operations {
             content: {
                 "application/json": {
                     name?: string;
+                    /** @description Markdown content */
+                    notes?: unknown | null;
                     userIds?: string[] | null;
-                    /** @description Custom field values for this task. Query available custom field configurations via GET /v1/tasks/configuration, which returns customColumns with their definitions. If undefined, custom field values are not updated. If null or empty array, all custom field values will be cleared. */
                     customFieldValues?: {
                         /** Format: uuid */
                         columnId: string;
@@ -5976,7 +7966,10 @@ export interface operations {
                         /** Format: uuid */
                         id: string;
                         name: string;
-                        type: string;
+                        /** @enum {string} */
+                        type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                        /** @description Markdown content */
+                        notes?: unknown | null;
                         createdAt: string;
                         updatedAt: string;
                         users: {
@@ -6111,7 +8104,7 @@ export interface operations {
                     };
                     pagination?: {
                         page: number;
-                        pageSize: 5 | 10 | 25 | 100 | 1000;
+                        pageSize: 5 | 10 | 25 | 100;
                     };
                 };
             };
@@ -6132,7 +8125,7 @@ export interface operations {
                         };
                         pagination?: {
                             page: number;
-                            pageSize: 5 | 10 | 25 | 100 | 1000;
+                            pageSize: 5 | 10 | 25 | 100;
                             totalPages: number;
                             total: number;
                         };
@@ -6197,7 +8190,7 @@ export interface operations {
                         firstName: string;
                         lastName: string;
                         /** @enum {string} */
-                        country: "af" | "ao" | "al" | "ad" | "ae" | "ar" | "am" | "ag" | "au" | "at" | "az" | "bi" | "be" | "bj" | "bf" | "bd" | "bg" | "bh" | "bs" | "ba" | "by" | "bz" | "bo" | "br" | "bb" | "bn" | "bt" | "bw" | "cf" | "ca" | "ch" | "cl" | "cn" | "ci" | "cm" | "cd" | "cg" | "co" | "km" | "cv" | "cr" | "cu" | "cy" | "cz" | "de" | "dj" | "dm" | "dk" | "do" | "dz" | "ec" | "eg" | "er" | "es" | "ee" | "et" | "fi" | "fj" | "fr" | "fm" | "ga" | "gb" | "ge" | "gh" | "gn" | "gm" | "gw" | "gq" | "gr" | "gd" | "gt" | "gy" | "hn" | "hr" | "ht" | "hu" | "id" | "in" | "ie" | "ir" | "iq" | "is" | "il" | "it" | "jm" | "jo" | "jp";
+                        country: "af" | "ao" | "al" | "ad" | "ae" | "ar" | "am" | "ag" | "au" | "at" | "az" | "bi" | "be" | "bj" | "bf" | "bd" | "bg" | "bh" | "bs" | "ba" | "by" | "bz" | "bo" | "br" | "bb" | "bn" | "bt" | "bw" | "cf" | "ca" | "ch" | "cl" | "cn" | "ci" | "cm" | "cd" | "cg" | "co" | "km" | "cv" | "cr" | "cu" | "cy" | "cz" | "de" | "dj" | "dm" | "dk" | "do" | "dz" | "ec" | "eg" | "er" | "es" | "ee" | "et" | "fi" | "fj" | "fr" | "fm" | "ga" | "gb" | "ge" | "gh" | "gn" | "gm" | "gw" | "gq" | "gr" | "gd" | "gt" | "gy" | "hn" | "hr" | "ht" | "hu" | "id" | "in" | "ie" | "ir" | "iq" | "is" | "il" | "it" | "jm" | "jo" | "jp" | "ke" | "kg" | "kh" | "ki" | "kn" | "kp" | "kr" | "kw" | "kz" | "la" | "lb" | "lc" | "li" | "lk" | "lr" | "ls" | "lt" | "lu" | "lv" | "ly" | "ma" | "mc" | "md" | "me" | "mg" | "mh" | "mk" | "ml" | "mm" | "mn" | "mr" | "mt" | "mu" | "mv" | "mw" | "mx" | "my" | "mz" | "na" | "ne" | "ng" | "ni" | "nl" | "no" | "np" | "nr" | "nz" | "om" | "pa" | "pe" | "pg" | "ph" | "pk" | "pl" | "pt" | "pw" | "py" | "qa" | "ro" | "rs" | "ru" | "rw" | "sa" | "sb" | "sc" | "sd" | "se" | "sg" | "si" | "sk" | "sl" | "sm" | "sn" | "so" | "sr" | "ss" | "st" | "sv" | "sy" | "sz" | "td" | "tg" | "th" | "tj" | "tl" | "tm" | "tn" | "to" | "tr" | "tt" | "tv" | "tz" | "ua" | "ug" | "us" | "uy" | "uz" | "va" | "vc" | "ve" | "vn" | "vu" | "ws" | "ye" | "za" | "zm" | "zw";
                         avatarUrl: string | null;
                     };
                 };

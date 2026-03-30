@@ -1,6 +1,7 @@
 import type {
 	IExecuteFunctions,
 	ICredentialDataDecryptedObject,
+	IDataObject,
 	INodeExecutionData,
 	INodeProperties,
 } from 'n8n-workflow';
@@ -48,7 +49,7 @@ export async function createTask(
 	})) as CreateSuccessResponse;
 
 	return {
-		json: response,
+		json: response as IDataObject,
 		pairedItem: { item: itemIndex },
 	};
 }

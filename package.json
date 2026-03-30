@@ -27,7 +27,7 @@
 		"url": "https://github.com/customermates/n8n-nodes-crm.git"
 	},
 	"scripts": {
-		"generate-types": "npx -y openapi-typescript https://customermates.com/openapi.json -o lib/generated/types.ts",
+		"generate-types": "npx -y openapi-typescript https://customermates.com/v1/openapi.json -o lib/generated/types.ts",
 		"build": "n8n-node build",
 		"build:watch": "tsc --watch",
 		"dev": "n8n-node dev",

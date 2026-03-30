@@ -17,7 +17,7 @@ export async function loadContactOptions(
 		const body: SearchRequest = {
 			pagination: {
 				page: 1,
-				pageSize: 1000,
+				pageSize: 100,
 			},
 		};
 

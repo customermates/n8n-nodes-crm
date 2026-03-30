@@ -1,6 +1,7 @@
 import type {
 	IExecuteFunctions,
 	ICredentialDataDecryptedObject,
+	IDataObject,
 	INodeExecutionData,
 	INodeProperties,
 } from 'n8n-workflow';
@@ -79,7 +80,7 @@ export async function updateService(
 	})) as UpdateSuccessResponse;
 
 	return {
-		json: response,
+		json: response as IDataObject,
 		pairedItem: { item: itemIndex },
 	};
 }
