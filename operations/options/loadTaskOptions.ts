@@ -2,17 +2,17 @@ import type { ILoadOptionsFunctions, INodePropertyOptions } from 'n8n-workflow';
 import { getBaseURL } from '../../helpers/getBaseURL';
 import type { paths } from '../../lib/generated/types';
 
-export async function loadContactOptions(
+export async function loadTaskOptions(
 	this: ILoadOptionsFunctions,
 ): Promise<INodePropertyOptions[]> {
 	const credentials = await this.getCredentials('customermatesApi');
 
 	try {
 		type SearchRequest = NonNullable<
-			paths['/v1/contacts/search']['post']['requestBody']
+			paths['/v1/tasks/search']['post']['requestBody']
 		>['content']['application/json'];
 		type SearchResponse =
-			paths['/v1/contacts/search']['post']['responses']['200']['content']['application/json'];
+			paths['/v1/tasks/search']['post']['responses']['200']['content']['application/json'];
 
 		const body: SearchRequest = {
 			pagination: {
@@ -23,7 +23,7 @@ export async function loadContactOptions(
 
 		const response = (await this.helpers.httpRequest({
 			method: 'POST',
-			url: `${getBaseURL(credentials)}/api/v1/contacts/search`,
+			url: `${getBaseURL(credentials)}/api/v1/tasks/search`,
 			headers: {
 				'x-api-key': credentials.apiKey as string,
 				'Content-Type': 'application/json',
@@ -34,9 +34,9 @@ export async function loadContactOptions(
 		})) as SearchResponse;
 
 		if (response.items) {
-			return response.items.map((contact) => ({
-				name: `${contact.firstName} ${contact.lastName}`.trim(),
-				value: contact.id,
+			return response.items.map((task) => ({
+				name: task.name,
+				value: task.id,
 			}));
 		}
 	} catch {

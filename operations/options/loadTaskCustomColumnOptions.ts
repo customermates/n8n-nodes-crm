@@ -1,5 +1,5 @@
 import type { ILoadOptionsFunctions, INodePropertyOptions } from 'n8n-workflow';
-import { BASE_URL } from '../../constants';
+import { getBaseURL } from '../../helpers/getBaseURL';
 import type { paths } from '../../lib/generated/types';
 
 export async function loadTaskCustomColumnOptions(
@@ -12,7 +12,7 @@ export async function loadTaskCustomColumnOptions(
 			paths['/v1/tasks/configuration']['get']['responses']['200']['content']['application/json'];
 		const response = (await this.helpers.httpRequest({
 			method: 'GET',
-			url: `${BASE_URL}/api/v1/tasks/configuration`,
+			url: `${getBaseURL(credentials)}/api/v1/tasks/configuration`,
 			headers: {
 				'x-api-key': credentials.apiKey as string,
 				Accept: 'application/json',

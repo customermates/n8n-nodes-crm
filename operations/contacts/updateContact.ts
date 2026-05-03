@@ -6,7 +6,7 @@ import type {
 	INodeProperties,
 } from 'n8n-workflow';
 import { NodeOperationError } from 'n8n-workflow';
-import { BASE_URL } from '../../constants';
+import { getBaseURL } from '../../helpers/getBaseURL';
 import type { paths } from '../../lib/generated/types';
 
 type UpdateRequest = NonNullable<
@@ -24,9 +24,11 @@ export async function updateContact(
 	const updateFields = this.getNodeParameter('updateFields', itemIndex, {}) as {
 		firstName?: string;
 		lastName?: string;
+		emails?: string;
 		organizationIds?: string[];
 		userIds?: string[];
 		dealIds?: string[];
+		taskIds?: string[];
 		customFieldValues?: {
 			field?: Array<{
 				columnId: string;
@@ -43,6 +45,12 @@ export async function updateContact(
 	if (updateFields.lastName !== undefined) {
 		requestBody.lastName = updateFields.lastName;
 	}
+	if (updateFields.emails !== undefined) {
+		requestBody.emails = updateFields.emails
+			.split(',')
+			.map((email) => email.trim())
+			.filter((email) => email.length > 0);
+	}
 	if (updateFields.organizationIds !== undefined) {
 		requestBody.organizationIds = updateFields.organizationIds;
 	}
@@ -51,6 +59,9 @@ export async function updateContact(
 	}
 	if (updateFields.dealIds !== undefined) {
 		requestBody.dealIds = updateFields.dealIds;
+	}
+	if (updateFields.taskIds !== undefined) {
+		requestBody.taskIds = updateFields.taskIds;
 	}
 	if (updateFields.customFieldValues?.field !== undefined) {
 		const seenColumnIds = new Set<string>();
@@ -73,7 +84,7 @@ export async function updateContact(
 
 	const response = (await this.helpers.httpRequest({
 		method: 'PUT',
-		url: `${BASE_URL}/api/v1/contacts/${contactId}`,
+		url: `${getBaseURL(credentials)}/api/v1/contacts/${contactId}`,
 		headers: {
 			'x-api-key': credentials.apiKey as string,
 			'Content-Type': 'application/json',
@@ -133,6 +144,14 @@ export const updateContactProperties: INodeProperties[] = [
 				description: 'The last name of the contact',
 			},
 			{
+				displayName: 'Emails',
+				name: 'emails',
+				type: 'string',
+				default: '',
+				placeholder: 'jane@example.com, jane.smith@example.com',
+				description: 'Comma-separated list of email addresses for this contact',
+			},
+			{
 				displayName: 'Organization Names or IDs',
 				name: 'organizationIds',
 				type: 'multiOptions',
@@ -164,6 +183,17 @@ export const updateContactProperties: INodeProperties[] = [
 				default: [],
 				description:
 					'The deals to associate with this contact. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+			},
+			{
+				displayName: 'Task Names or IDs',
+				name: 'taskIds',
+				type: 'multiOptions',
+				typeOptions: {
+					loadOptionsMethod: 'loadTaskOptions',
+				},
+				default: [],
+				description:
+					'The tasks to associate with this contact. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 			},
 			{
 				displayName: 'Custom Field Values',

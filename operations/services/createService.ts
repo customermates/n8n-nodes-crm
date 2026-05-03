@@ -5,7 +5,7 @@ import type {
 	INodeExecutionData,
 	INodeProperties,
 } from 'n8n-workflow';
-import { BASE_URL } from '../../constants';
+import { getBaseURL } from '../../helpers/getBaseURL';
 import type { paths } from '../../lib/generated/types';
 
 type CreateRequest = NonNullable<
@@ -24,6 +24,7 @@ export async function createService(
 	const additionalFields = this.getNodeParameter('additionalFields', itemIndex, {}) as {
 		userIds?: string[];
 		dealIds?: string[];
+		taskIds?: string[];
 		customFieldValues?: {
 			field?: Array<{
 				columnId: string;
@@ -37,12 +38,13 @@ export async function createService(
 		amount,
 		userIds: additionalFields.userIds || [],
 		dealIds: additionalFields.dealIds || [],
+		taskIds: additionalFields.taskIds || [],
 		customFieldValues: additionalFields.customFieldValues?.field || [],
 	};
 
 	const response = (await this.helpers.httpRequest({
 		method: 'POST',
-		url: `${BASE_URL}/api/v1/services`,
+		url: `${getBaseURL(credentials)}/api/v1/services`,
 		headers: {
 			'x-api-key': credentials.apiKey as string,
 			'Content-Type': 'application/json',
@@ -121,6 +123,17 @@ export const createServiceProperties: INodeProperties[] = [
 				default: [],
 				description:
 					'The deals to associate with this service. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+			},
+			{
+				displayName: 'Task Names or IDs',
+				name: 'taskIds',
+				type: 'multiOptions',
+				typeOptions: {
+					loadOptionsMethod: 'loadTaskOptions',
+				},
+				default: [],
+				description:
+					'The tasks to associate with this service. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 			},
 			{
 				displayName: 'Custom Field Values',

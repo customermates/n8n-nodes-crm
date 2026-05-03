@@ -935,6 +935,8 @@ export interface components {
         CreateContactSchema: {
             firstName: string;
             lastName: string;
+            /** @default [] */
+            emails: string[];
             /** @description Markdown content */
             notes?: unknown | null;
             /** @default [] */
@@ -943,6 +945,8 @@ export interface components {
             userIds: string[];
             /** @default [] */
             dealIds: string[];
+            /** @default [] */
+            taskIds: string[];
             /** @default [] */
             customFieldValues: {
                 /** Format: uuid */
@@ -954,6 +958,8 @@ export interface components {
             contacts: {
                 firstName: string;
                 lastName: string;
+                /** @default [] */
+                emails: string[];
                 /** @description Markdown content */
                 notes?: unknown | null;
                 /** @default [] */
@@ -962,6 +968,8 @@ export interface components {
                 userIds: string[];
                 /** @default [] */
                 dealIds: string[];
+                /** @default [] */
+                taskIds: string[];
                 /** @default [] */
                 customFieldValues: {
                     /** Format: uuid */
@@ -976,11 +984,13 @@ export interface components {
                 id: string;
                 firstName?: string;
                 lastName?: string;
+                emails?: string[] | null;
                 /** @description Markdown content */
                 notes?: unknown | null;
                 organizationIds?: string[] | null;
                 userIds?: string[] | null;
                 dealIds?: string[] | null;
+                taskIds?: string[] | null;
                 customFieldValues?: {
                     /** Format: uuid */
                     columnId: string;
@@ -1002,6 +1012,8 @@ export interface components {
             /** @default [] */
             dealIds: string[];
             /** @default [] */
+            taskIds: string[];
+            /** @default [] */
             customFieldValues: {
                 /** Format: uuid */
                 columnId: string;
@@ -1020,6 +1032,8 @@ export interface components {
                 /** @default [] */
                 dealIds: string[];
                 /** @default [] */
+                taskIds: string[];
+                /** @default [] */
                 customFieldValues: {
                     /** Format: uuid */
                     columnId: string;
@@ -1037,6 +1051,7 @@ export interface components {
                 contactIds?: string[] | null;
                 userIds?: string[] | null;
                 dealIds?: string[] | null;
+                taskIds?: string[] | null;
                 customFieldValues?: {
                     /** Format: uuid */
                     columnId: string;
@@ -1065,6 +1080,8 @@ export interface components {
                 quantity: number;
             }[];
             /** @default [] */
+            taskIds: string[];
+            /** @default [] */
             customFieldValues: {
                 /** Format: uuid */
                 columnId: string;
@@ -1090,6 +1107,8 @@ export interface components {
                     quantity: number;
                 }[];
                 /** @default [] */
+                taskIds: string[];
+                /** @default [] */
                 customFieldValues: {
                     /** Format: uuid */
                     columnId: string;
@@ -1113,6 +1132,7 @@ export interface components {
                     /** @default 1 */
                     quantity: number;
                 }[] | null;
+                taskIds?: string[] | null;
                 customFieldValues?: {
                     /** Format: uuid */
                     columnId: string;
@@ -1133,6 +1153,8 @@ export interface components {
             /** @default [] */
             dealIds: string[];
             /** @default [] */
+            taskIds: string[];
+            /** @default [] */
             customFieldValues: {
                 /** Format: uuid */
                 columnId: string;
@@ -1149,6 +1171,8 @@ export interface components {
                 userIds: string[];
                 /** @default [] */
                 dealIds: string[];
+                /** @default [] */
+                taskIds: string[];
                 /** @default [] */
                 customFieldValues: {
                     /** Format: uuid */
@@ -1167,6 +1191,7 @@ export interface components {
                 notes?: unknown | null;
                 userIds?: string[] | null;
                 dealIds?: string[] | null;
+                taskIds?: string[] | null;
                 customFieldValues?: {
                     /** Format: uuid */
                     columnId: string;
@@ -1184,6 +1209,14 @@ export interface components {
             /** @default [] */
             userIds: string[];
             /** @default [] */
+            contactIds: string[];
+            /** @default [] */
+            organizationIds: string[];
+            /** @default [] */
+            dealIds: string[];
+            /** @default [] */
+            serviceIds: string[];
+            /** @default [] */
             customFieldValues: {
                 /** Format: uuid */
                 columnId: string;
@@ -1197,6 +1230,14 @@ export interface components {
                 notes?: unknown | null;
                 /** @default [] */
                 userIds: string[];
+                /** @default [] */
+                contactIds: string[];
+                /** @default [] */
+                organizationIds: string[];
+                /** @default [] */
+                dealIds: string[];
+                /** @default [] */
+                serviceIds: string[];
                 /** @default [] */
                 customFieldValues: {
                     /** Format: uuid */
@@ -1213,6 +1254,10 @@ export interface components {
                 /** @description Markdown content */
                 notes?: unknown | null;
                 userIds?: string[] | null;
+                contactIds?: string[] | null;
+                organizationIds?: string[] | null;
+                dealIds?: string[] | null;
+                serviceIds?: string[] | null;
                 customFieldValues?: {
                     /** Format: uuid */
                     columnId: string;
@@ -1235,6 +1280,7 @@ export interface components {
                     id: string;
                     firstName: string;
                     lastName: string;
+                    emails: string[];
                     /** @description Markdown content */
                     notes?: unknown | null;
                     createdAt: string;
@@ -1257,6 +1303,13 @@ export interface components {
                         /** Format: uuid */
                         id: string;
                         name: string;
+                    }[];
+                    tasks: {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        /** @enum {string} */
+                        type: "userPendingAuthorization" | "custom";
                     }[];
                     /** @description Custom field values for this contact. Query available custom field configurations via GET /v1/contacts/configuration, which returns customColumns with their definitions. */
                     customFieldValues: {
@@ -1284,6 +1337,7 @@ export interface components {
                         id: string;
                         firstName: string;
                         lastName: string;
+                        emails: string[];
                         /** @description Markdown content */
                         notes?: unknown | null;
                         createdAt: string;
@@ -1306,6 +1360,13 @@ export interface components {
                             /** Format: uuid */
                             id: string;
                             name: string;
+                        }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
                         }[];
                         /** @description Custom field values for this contact. Query available custom field configurations via GET /v1/contacts/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -1375,6 +1436,22 @@ export interface components {
                                 name: string;
                             }[];
                         };
+                        tasks?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
+                            }[];
+                        };
                         customFieldValues?: {
                             previous: {
                                 /** Format: uuid */
@@ -1407,6 +1484,7 @@ export interface components {
                     id: string;
                     firstName: string;
                     lastName: string;
+                    emails: string[];
                     /** @description Markdown content */
                     notes?: unknown | null;
                     createdAt: string;
@@ -1429,6 +1507,13 @@ export interface components {
                         /** Format: uuid */
                         id: string;
                         name: string;
+                    }[];
+                    tasks: {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        /** @enum {string} */
+                        type: "userPendingAuthorization" | "custom";
                     }[];
                     /** @description Custom field values for this contact. Query available custom field configurations via GET /v1/contacts/configuration, which returns customColumns with their definitions. */
                     customFieldValues: {
@@ -1478,6 +1563,13 @@ export interface components {
                         id: string;
                         name: string;
                     }[];
+                    tasks: {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        /** @enum {string} */
+                        type: "userPendingAuthorization" | "custom";
+                    }[];
                     /** @description Custom field values for this organization. Query available custom field configurations via GET /v1/organizations/configuration, which returns customColumns with their definitions. */
                     customFieldValues: {
                         /** Format: uuid */
@@ -1526,6 +1618,13 @@ export interface components {
                             /** Format: uuid */
                             id: string;
                             name: string;
+                        }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
                         }[];
                         /** @description Custom field values for this organization. Query available custom field configurations via GET /v1/organizations/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -1593,6 +1692,22 @@ export interface components {
                                 name: string;
                             }[];
                         };
+                        tasks?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
+                            }[];
+                        };
                         customFieldValues?: {
                             previous: {
                                 /** Format: uuid */
@@ -1647,6 +1762,13 @@ export interface components {
                         /** Format: uuid */
                         id: string;
                         name: string;
+                    }[];
+                    tasks: {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        /** @enum {string} */
+                        type: "userPendingAuthorization" | "custom";
                     }[];
                     /** @description Custom field values for this organization. Query available custom field configurations via GET /v1/organizations/configuration, which returns customColumns with their definitions. */
                     customFieldValues: {
@@ -1705,6 +1827,13 @@ export interface components {
                         amount: number;
                         quantity: number;
                     }[];
+                    tasks: {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        /** @enum {string} */
+                        type: "userPendingAuthorization" | "custom";
+                    }[];
                     /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
                     customFieldValues: {
                         /** Format: uuid */
@@ -1762,6 +1891,13 @@ export interface components {
                             name: string;
                             amount: number;
                             quantity: number;
+                        }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
                         }[];
                         /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -1853,6 +1989,22 @@ export interface components {
                                 quantity: number;
                             }[];
                         };
+                        tasks?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
+                            }[];
+                        };
                         customFieldValues?: {
                             previous: {
                                 /** Format: uuid */
@@ -1917,6 +2069,13 @@ export interface components {
                         amount: number;
                         quantity: number;
                     }[];
+                    tasks: {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        /** @enum {string} */
+                        type: "userPendingAuthorization" | "custom";
+                    }[];
                     /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
                     customFieldValues: {
                         /** Format: uuid */
@@ -1959,6 +2118,13 @@ export interface components {
                         /** Format: uuid */
                         id: string;
                         name: string;
+                    }[];
+                    tasks: {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        /** @enum {string} */
+                        type: "userPendingAuthorization" | "custom";
                     }[];
                     /** @description Custom field values for this service. Query available custom field configurations via GET /v1/services/configuration, which returns customColumns with their definitions. */
                     customFieldValues: {
@@ -2003,6 +2169,13 @@ export interface components {
                             /** Format: uuid */
                             id: string;
                             name: string;
+                        }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
                         }[];
                         /** @description Custom field values for this service. Query available custom field configurations via GET /v1/services/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -2060,6 +2233,22 @@ export interface components {
                                 name: string;
                             }[];
                         };
+                        tasks?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
+                            }[];
+                        };
                         customFieldValues?: {
                             previous: {
                                 /** Format: uuid */
@@ -2110,6 +2299,13 @@ export interface components {
                         id: string;
                         name: string;
                     }[];
+                    tasks: {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        /** @enum {string} */
+                        type: "userPendingAuthorization" | "custom";
+                    }[];
                     /** @description Custom field values for this service. Query available custom field configurations via GET /v1/services/configuration, which returns customColumns with their definitions. */
                     customFieldValues: {
                         /** Format: uuid */
@@ -2135,7 +2331,7 @@ export interface components {
                     id: string;
                     name: string;
                     /** @enum {string} */
-                    type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                    type: "userPendingAuthorization" | "custom";
                     /** @description Markdown content */
                     notes?: unknown | null;
                     createdAt: string;
@@ -2148,6 +2344,28 @@ export interface components {
                         avatarUrl: string | null;
                         /** Format: email */
                         email: string;
+                    }[];
+                    contacts: {
+                        /** Format: uuid */
+                        id: string;
+                        firstName: string;
+                        lastName: string;
+                    }[];
+                    organizations: {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                    }[];
+                    deals: {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                    }[];
+                    services: {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        amount: number;
                     }[];
                     /** @description Custom field values for this task. Query available custom field configurations via GET /v1/tasks/configuration, which returns customColumns with their definitions. */
                     customFieldValues: {
@@ -2175,7 +2393,7 @@ export interface components {
                         id: string;
                         name: string;
                         /** @enum {string} */
-                        type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                        type: "userPendingAuthorization" | "custom";
                         /** @description Markdown content */
                         notes?: unknown | null;
                         createdAt: string;
@@ -2188,6 +2406,28 @@ export interface components {
                             avatarUrl: string | null;
                             /** Format: email */
                             email: string;
+                        }[];
+                        contacts: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                        }[];
+                        organizations: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        deals: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        services: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            amount: number;
                         }[];
                         /** @description Custom field values for this task. Query available custom field configurations via GET /v1/tasks/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -2229,6 +2469,58 @@ export interface components {
                                 email: string;
                             }[];
                         };
+                        contacts?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                            }[];
+                        };
+                        organizations?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                        };
+                        deals?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                        };
+                        services?: {
+                            previous: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                amount: number;
+                            }[];
+                            current: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                amount: number;
+                            }[];
+                        };
                         customFieldValues?: {
                             previous: {
                                 /** Format: uuid */
@@ -2261,7 +2553,7 @@ export interface components {
                     id: string;
                     name: string;
                     /** @enum {string} */
-                    type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                    type: "userPendingAuthorization" | "custom";
                     /** @description Markdown content */
                     notes?: unknown | null;
                     createdAt: string;
@@ -2274,6 +2566,28 @@ export interface components {
                         avatarUrl: string | null;
                         /** Format: email */
                         email: string;
+                    }[];
+                    contacts: {
+                        /** Format: uuid */
+                        id: string;
+                        firstName: string;
+                        lastName: string;
+                    }[];
+                    organizations: {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                    }[];
+                    deals: {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                    }[];
+                    services: {
+                        /** Format: uuid */
+                        id: string;
+                        name: string;
+                        amount: number;
                     }[];
                     /** @description Custom field values for this task. Query available custom field configurations via GET /v1/tasks/configuration, which returns customColumns with their definitions. */
                     customFieldValues: {
@@ -2311,11 +2625,13 @@ export interface components {
             id: string;
             firstName?: string;
             lastName?: string;
+            emails?: string[] | null;
             /** @description Markdown content */
             notes?: unknown | null;
             organizationIds?: string[] | null;
             userIds?: string[] | null;
             dealIds?: string[] | null;
+            taskIds?: string[] | null;
             customFieldValues?: {
                 /** Format: uuid */
                 columnId: string;
@@ -2339,6 +2655,7 @@ export interface components {
             contactIds?: string[] | null;
             userIds?: string[] | null;
             dealIds?: string[] | null;
+            taskIds?: string[] | null;
             customFieldValues?: {
                 /** Format: uuid */
                 columnId: string;
@@ -2368,6 +2685,7 @@ export interface components {
                 /** @default 1 */
                 quantity: number;
             }[] | null;
+            taskIds?: string[] | null;
             customFieldValues?: {
                 /** Format: uuid */
                 columnId: string;
@@ -2391,6 +2709,7 @@ export interface components {
             notes?: unknown | null;
             userIds?: string[] | null;
             dealIds?: string[] | null;
+            taskIds?: string[] | null;
             customFieldValues?: {
                 /** Format: uuid */
                 columnId: string;
@@ -2412,6 +2731,10 @@ export interface components {
             /** @description Markdown content */
             notes?: unknown | null;
             userIds?: string[] | null;
+            contactIds?: string[] | null;
+            organizationIds?: string[] | null;
+            dealIds?: string[] | null;
+            serviceIds?: string[] | null;
             customFieldValues?: {
                 /** Format: uuid */
                 columnId: string;
@@ -2455,6 +2778,7 @@ export interface operations {
                         id: string;
                         firstName: string;
                         lastName: string;
+                        emails: string[];
                         /** @description Markdown content */
                         notes?: unknown | null;
                         createdAt: string;
@@ -2477,6 +2801,13 @@ export interface operations {
                             /** Format: uuid */
                             id: string;
                             name: string;
+                        }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
                         }[];
                         /** @description Custom field values for this contact. Query available custom field configurations via GET /v1/contacts/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -2549,6 +2880,7 @@ export interface operations {
                         id: string;
                         firstName: string;
                         lastName: string;
+                        emails: string[];
                         /** @description Markdown content */
                         notes?: unknown | null;
                         createdAt: string;
@@ -2571,6 +2903,13 @@ export interface operations {
                             /** Format: uuid */
                             id: string;
                             name: string;
+                        }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
                         }[];
                         /** @description Custom field values for this contact. Query available custom field configurations via GET /v1/contacts/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -2643,6 +2982,7 @@ export interface operations {
                         id: string;
                         firstName: string;
                         lastName: string;
+                        emails: string[];
                         /** @description Markdown content */
                         notes?: unknown | null;
                         createdAt: string;
@@ -2665,6 +3005,13 @@ export interface operations {
                             /** Format: uuid */
                             id: string;
                             name: string;
+                        }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
                         }[];
                         /** @description Custom field values for this contact. Query available custom field configurations via GET /v1/contacts/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -2789,11 +3136,19 @@ export interface operations {
                         value: string;
                     } | {
                         field: string;
-                        operator: "in" | "notIn" | "between";
+                        operator: "in" | "notIn" | "between" | "hasNone" | "hasSome";
                         value: string[];
                     } | {
                         field: string;
-                        operator: "isNull" | "isNotNull" | "hasNone" | "hasSome";
+                        operator: "isNull" | "isNotNull";
+                    } | {
+                        field: string;
+                        /**
+                         * inLastDays
+                         * @constant
+                         */
+                        operator: "inLastDays";
+                        value: number;
                     })[];
                     searchTerm?: string;
                     sortDescriptor?: {
@@ -2835,7 +3190,7 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -2847,7 +3202,31 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateTimeRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -2858,7 +3237,7 @@ export interface operations {
                             type: "link";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -2871,7 +3250,7 @@ export interface operations {
                             type: "currency";
                             options: {
                                 /** @enum {string} */
-                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf";
+                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf" | "sek" | "nok" | "dkk" | "pln" | "czk" | "huf" | "try" | "twd" | "zar" | "mxn" | "krw" | "hkd" | "sgd" | "nzd" | "aed" | "sar" | "ils";
                             };
                         } | {
                             /** Format: uuid */
@@ -2886,7 +3265,7 @@ export interface operations {
                                     value: string;
                                     label: string;
                                     /** @enum {string} */
-                                    color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                    color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                     isDefault: boolean;
                                     index: number;
                                 }[];
@@ -2901,7 +3280,7 @@ export interface operations {
                             type: "email";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -2914,7 +3293,7 @@ export interface operations {
                             type: "phone";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         })[];
@@ -2924,11 +3303,19 @@ export interface operations {
                             value: string;
                         } | {
                             field: string;
-                            operator: "in" | "notIn" | "between";
+                            operator: "in" | "notIn" | "between" | "hasNone" | "hasSome";
                             value: string[];
                         } | {
                             field: string;
-                            operator: "isNull" | "isNotNull" | "hasNone" | "hasSome";
+                            operator: "isNull" | "isNotNull";
+                        } | {
+                            field: string;
+                            /**
+                             * inLastDays
+                             * @constant
+                             */
+                            operator: "inLastDays";
+                            value: number;
                         })[];
                         searchTerm?: string;
                         sortDescriptor?: {
@@ -2944,7 +3331,7 @@ export interface operations {
                         };
                         filterableFields?: {
                             field: string;
-                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome")[];
+                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome" | "inLastDays")[];
                             label?: string;
                         }[];
                         savedFilterPresets?: {
@@ -2957,11 +3344,19 @@ export interface operations {
                                 value: string;
                             } | {
                                 field: string;
-                                operator: "in" | "notIn" | "between";
+                                operator: "in" | "notIn" | "between" | "hasNone" | "hasSome";
                                 value: string[];
                             } | {
                                 field: string;
-                                operator: "isNull" | "isNotNull" | "hasNone" | "hasSome";
+                                operator: "isNull" | "isNotNull";
+                            } | {
+                                field: string;
+                                /**
+                                 * inLastDays
+                                 * @constant
+                                 */
+                                operator: "inLastDays";
+                                value: number;
                             })[];
                         }[];
                         items: {
@@ -2969,6 +3364,7 @@ export interface operations {
                             id: string;
                             firstName: string;
                             lastName: string;
+                            emails: string[];
                             /** @description Markdown content */
                             notes?: unknown | null;
                             createdAt: string;
@@ -2991,6 +3387,13 @@ export interface operations {
                                 /** Format: uuid */
                                 id: string;
                                 name: string;
+                            }[];
+                            tasks: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
                             }[];
                             /** @description Custom field values for this contact. Query available custom field configurations via GET /v1/contacts/configuration, which returns customColumns with their definitions. */
                             customFieldValues: {
@@ -3075,7 +3478,7 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -3087,7 +3490,31 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateTimeRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -3098,7 +3525,7 @@ export interface operations {
                             type: "link";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -3111,7 +3538,7 @@ export interface operations {
                             type: "currency";
                             options: {
                                 /** @enum {string} */
-                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf";
+                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf" | "sek" | "nok" | "dkk" | "pln" | "czk" | "huf" | "try" | "twd" | "zar" | "mxn" | "krw" | "hkd" | "sgd" | "nzd" | "aed" | "sar" | "ils";
                             };
                         } | {
                             /** Format: uuid */
@@ -3126,7 +3553,7 @@ export interface operations {
                                     value: string;
                                     label: string;
                                     /** @enum {string} */
-                                    color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                    color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                     isDefault: boolean;
                                     index: number;
                                 }[];
@@ -3141,7 +3568,7 @@ export interface operations {
                             type: "email";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -3154,16 +3581,20 @@ export interface operations {
                             type: "phone";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         })[];
                         filterableFields: {
                             field: string;
-                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome")[];
+                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome" | "inLastDays")[];
                             label?: string;
                         }[];
-                        sortableFields: string[];
+                        sortableFields: {
+                            field: string;
+                            label?: string;
+                            columnType?: string;
+                        }[];
                     };
                 };
             };
@@ -3228,6 +3659,7 @@ export interface operations {
                             id: string;
                             firstName: string;
                             lastName: string;
+                            emails: string[];
                             /** @description Markdown content */
                             notes?: unknown | null;
                             createdAt: string;
@@ -3250,6 +3682,13 @@ export interface operations {
                                 /** Format: uuid */
                                 id: string;
                                 name: string;
+                            }[];
+                            tasks: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
                             }[];
                             /** @description Custom field values for this contact. Query available custom field configurations via GET /v1/contacts/configuration, which returns customColumns with their definitions. */
                             customFieldValues: {
@@ -3277,7 +3716,7 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -3289,7 +3728,31 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateTimeRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -3300,7 +3763,7 @@ export interface operations {
                             type: "link";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -3313,7 +3776,7 @@ export interface operations {
                             type: "currency";
                             options: {
                                 /** @enum {string} */
-                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf";
+                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf" | "sek" | "nok" | "dkk" | "pln" | "czk" | "huf" | "try" | "twd" | "zar" | "mxn" | "krw" | "hkd" | "sgd" | "nzd" | "aed" | "sar" | "ils";
                             };
                         } | {
                             /** Format: uuid */
@@ -3328,7 +3791,7 @@ export interface operations {
                                     value: string;
                                     label: string;
                                     /** @enum {string} */
-                                    color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                    color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                     isDefault: boolean;
                                     index: number;
                                 }[];
@@ -3343,7 +3806,7 @@ export interface operations {
                             type: "email";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -3356,7 +3819,7 @@ export interface operations {
                             type: "phone";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         })[];
@@ -3415,11 +3878,13 @@ export interface operations {
                 "application/json": {
                     firstName?: string;
                     lastName?: string;
+                    emails?: string[] | null;
                     /** @description Markdown content */
                     notes?: unknown | null;
                     organizationIds?: string[] | null;
                     userIds?: string[] | null;
                     dealIds?: string[] | null;
+                    taskIds?: string[] | null;
                     customFieldValues?: {
                         /** Format: uuid */
                         columnId: string;
@@ -3440,6 +3905,7 @@ export interface operations {
                         id: string;
                         firstName: string;
                         lastName: string;
+                        emails: string[];
                         /** @description Markdown content */
                         notes?: unknown | null;
                         createdAt: string;
@@ -3462,6 +3928,13 @@ export interface operations {
                             /** Format: uuid */
                             id: string;
                             name: string;
+                        }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
                         }[];
                         /** @description Custom field values for this contact. Query available custom field configurations via GET /v1/contacts/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -3615,6 +4088,13 @@ export interface operations {
                             id: string;
                             name: string;
                         }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
+                        }[];
                         /** @description Custom field values for this organization. Query available custom field configurations via GET /v1/organizations/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
                             /** Format: uuid */
@@ -3709,6 +4189,13 @@ export interface operations {
                             id: string;
                             name: string;
                         }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
+                        }[];
                         /** @description Custom field values for this organization. Query available custom field configurations via GET /v1/organizations/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
                             /** Format: uuid */
@@ -3802,6 +4289,13 @@ export interface operations {
                             /** Format: uuid */
                             id: string;
                             name: string;
+                        }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
                         }[];
                         /** @description Custom field values for this organization. Query available custom field configurations via GET /v1/organizations/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -3926,11 +4420,19 @@ export interface operations {
                         value: string;
                     } | {
                         field: string;
-                        operator: "in" | "notIn" | "between";
+                        operator: "in" | "notIn" | "between" | "hasNone" | "hasSome";
                         value: string[];
                     } | {
                         field: string;
-                        operator: "isNull" | "isNotNull" | "hasNone" | "hasSome";
+                        operator: "isNull" | "isNotNull";
+                    } | {
+                        field: string;
+                        /**
+                         * inLastDays
+                         * @constant
+                         */
+                        operator: "inLastDays";
+                        value: number;
                     })[];
                     searchTerm?: string;
                     sortDescriptor?: {
@@ -3972,7 +4474,7 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -3984,7 +4486,31 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateTimeRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -3995,7 +4521,7 @@ export interface operations {
                             type: "link";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -4008,7 +4534,7 @@ export interface operations {
                             type: "currency";
                             options: {
                                 /** @enum {string} */
-                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf";
+                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf" | "sek" | "nok" | "dkk" | "pln" | "czk" | "huf" | "try" | "twd" | "zar" | "mxn" | "krw" | "hkd" | "sgd" | "nzd" | "aed" | "sar" | "ils";
                             };
                         } | {
                             /** Format: uuid */
@@ -4023,7 +4549,7 @@ export interface operations {
                                     value: string;
                                     label: string;
                                     /** @enum {string} */
-                                    color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                    color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                     isDefault: boolean;
                                     index: number;
                                 }[];
@@ -4038,7 +4564,7 @@ export interface operations {
                             type: "email";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -4051,7 +4577,7 @@ export interface operations {
                             type: "phone";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         })[];
@@ -4061,11 +4587,19 @@ export interface operations {
                             value: string;
                         } | {
                             field: string;
-                            operator: "in" | "notIn" | "between";
+                            operator: "in" | "notIn" | "between" | "hasNone" | "hasSome";
                             value: string[];
                         } | {
                             field: string;
-                            operator: "isNull" | "isNotNull" | "hasNone" | "hasSome";
+                            operator: "isNull" | "isNotNull";
+                        } | {
+                            field: string;
+                            /**
+                             * inLastDays
+                             * @constant
+                             */
+                            operator: "inLastDays";
+                            value: number;
                         })[];
                         searchTerm?: string;
                         sortDescriptor?: {
@@ -4081,7 +4615,7 @@ export interface operations {
                         };
                         filterableFields?: {
                             field: string;
-                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome")[];
+                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome" | "inLastDays")[];
                             label?: string;
                         }[];
                         savedFilterPresets?: {
@@ -4094,11 +4628,19 @@ export interface operations {
                                 value: string;
                             } | {
                                 field: string;
-                                operator: "in" | "notIn" | "between";
+                                operator: "in" | "notIn" | "between" | "hasNone" | "hasSome";
                                 value: string[];
                             } | {
                                 field: string;
-                                operator: "isNull" | "isNotNull" | "hasNone" | "hasSome";
+                                operator: "isNull" | "isNotNull";
+                            } | {
+                                field: string;
+                                /**
+                                 * inLastDays
+                                 * @constant
+                                 */
+                                operator: "inLastDays";
+                                value: number;
                             })[];
                         }[];
                         items: {
@@ -4128,6 +4670,13 @@ export interface operations {
                                 /** Format: uuid */
                                 id: string;
                                 name: string;
+                            }[];
+                            tasks: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
                             }[];
                             /** @description Custom field values for this organization. Query available custom field configurations via GET /v1/organizations/configuration, which returns customColumns with their definitions. */
                             customFieldValues: {
@@ -4212,7 +4761,7 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -4224,7 +4773,31 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateTimeRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -4235,7 +4808,7 @@ export interface operations {
                             type: "link";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -4248,7 +4821,7 @@ export interface operations {
                             type: "currency";
                             options: {
                                 /** @enum {string} */
-                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf";
+                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf" | "sek" | "nok" | "dkk" | "pln" | "czk" | "huf" | "try" | "twd" | "zar" | "mxn" | "krw" | "hkd" | "sgd" | "nzd" | "aed" | "sar" | "ils";
                             };
                         } | {
                             /** Format: uuid */
@@ -4263,7 +4836,7 @@ export interface operations {
                                     value: string;
                                     label: string;
                                     /** @enum {string} */
-                                    color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                    color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                     isDefault: boolean;
                                     index: number;
                                 }[];
@@ -4278,7 +4851,7 @@ export interface operations {
                             type: "email";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -4291,16 +4864,20 @@ export interface operations {
                             type: "phone";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         })[];
                         filterableFields: {
                             field: string;
-                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome")[];
+                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome" | "inLastDays")[];
                             label?: string;
                         }[];
-                        sortableFields: string[];
+                        sortableFields: {
+                            field: string;
+                            label?: string;
+                            columnType?: string;
+                        }[];
                     };
                 };
             };
@@ -4388,6 +4965,13 @@ export interface operations {
                                 id: string;
                                 name: string;
                             }[];
+                            tasks: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
+                            }[];
                             /** @description Custom field values for this organization. Query available custom field configurations via GET /v1/organizations/configuration, which returns customColumns with their definitions. */
                             customFieldValues: {
                                 /** Format: uuid */
@@ -4414,7 +4998,7 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -4426,7 +5010,31 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateTimeRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -4437,7 +5045,7 @@ export interface operations {
                             type: "link";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -4450,7 +5058,7 @@ export interface operations {
                             type: "currency";
                             options: {
                                 /** @enum {string} */
-                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf";
+                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf" | "sek" | "nok" | "dkk" | "pln" | "czk" | "huf" | "try" | "twd" | "zar" | "mxn" | "krw" | "hkd" | "sgd" | "nzd" | "aed" | "sar" | "ils";
                             };
                         } | {
                             /** Format: uuid */
@@ -4465,7 +5073,7 @@ export interface operations {
                                     value: string;
                                     label: string;
                                     /** @enum {string} */
-                                    color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                    color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                     isDefault: boolean;
                                     index: number;
                                 }[];
@@ -4480,7 +5088,7 @@ export interface operations {
                             type: "email";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -4493,7 +5101,7 @@ export interface operations {
                             type: "phone";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         })[];
@@ -4556,6 +5164,7 @@ export interface operations {
                     contactIds?: string[] | null;
                     userIds?: string[] | null;
                     dealIds?: string[] | null;
+                    taskIds?: string[] | null;
                     customFieldValues?: {
                         /** Format: uuid */
                         columnId: string;
@@ -4598,6 +5207,13 @@ export interface operations {
                             /** Format: uuid */
                             id: string;
                             name: string;
+                        }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
                         }[];
                         /** @description Custom field values for this organization. Query available custom field configurations via GET /v1/organizations/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -4760,6 +5376,13 @@ export interface operations {
                             amount: number;
                             quantity: number;
                         }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
+                        }[];
                         /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
                             /** Format: uuid */
@@ -4863,6 +5486,13 @@ export interface operations {
                             amount: number;
                             quantity: number;
                         }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
+                        }[];
                         /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
                             /** Format: uuid */
@@ -4965,6 +5595,13 @@ export interface operations {
                             name: string;
                             amount: number;
                             quantity: number;
+                        }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
                         }[];
                         /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -5089,11 +5726,19 @@ export interface operations {
                         value: string;
                     } | {
                         field: string;
-                        operator: "in" | "notIn" | "between";
+                        operator: "in" | "notIn" | "between" | "hasNone" | "hasSome";
                         value: string[];
                     } | {
                         field: string;
-                        operator: "isNull" | "isNotNull" | "hasNone" | "hasSome";
+                        operator: "isNull" | "isNotNull";
+                    } | {
+                        field: string;
+                        /**
+                         * inLastDays
+                         * @constant
+                         */
+                        operator: "inLastDays";
+                        value: number;
                     })[];
                     searchTerm?: string;
                     sortDescriptor?: {
@@ -5135,7 +5780,7 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -5147,7 +5792,31 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateTimeRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -5158,7 +5827,7 @@ export interface operations {
                             type: "link";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -5171,7 +5840,7 @@ export interface operations {
                             type: "currency";
                             options: {
                                 /** @enum {string} */
-                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf";
+                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf" | "sek" | "nok" | "dkk" | "pln" | "czk" | "huf" | "try" | "twd" | "zar" | "mxn" | "krw" | "hkd" | "sgd" | "nzd" | "aed" | "sar" | "ils";
                             };
                         } | {
                             /** Format: uuid */
@@ -5186,7 +5855,7 @@ export interface operations {
                                     value: string;
                                     label: string;
                                     /** @enum {string} */
-                                    color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                    color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                     isDefault: boolean;
                                     index: number;
                                 }[];
@@ -5201,7 +5870,7 @@ export interface operations {
                             type: "email";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -5214,7 +5883,7 @@ export interface operations {
                             type: "phone";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         })[];
@@ -5224,11 +5893,19 @@ export interface operations {
                             value: string;
                         } | {
                             field: string;
-                            operator: "in" | "notIn" | "between";
+                            operator: "in" | "notIn" | "between" | "hasNone" | "hasSome";
                             value: string[];
                         } | {
                             field: string;
-                            operator: "isNull" | "isNotNull" | "hasNone" | "hasSome";
+                            operator: "isNull" | "isNotNull";
+                        } | {
+                            field: string;
+                            /**
+                             * inLastDays
+                             * @constant
+                             */
+                            operator: "inLastDays";
+                            value: number;
                         })[];
                         searchTerm?: string;
                         sortDescriptor?: {
@@ -5244,7 +5921,7 @@ export interface operations {
                         };
                         filterableFields?: {
                             field: string;
-                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome")[];
+                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome" | "inLastDays")[];
                             label?: string;
                         }[];
                         savedFilterPresets?: {
@@ -5257,11 +5934,19 @@ export interface operations {
                                 value: string;
                             } | {
                                 field: string;
-                                operator: "in" | "notIn" | "between";
+                                operator: "in" | "notIn" | "between" | "hasNone" | "hasSome";
                                 value: string[];
                             } | {
                                 field: string;
-                                operator: "isNull" | "isNotNull" | "hasNone" | "hasSome";
+                                operator: "isNull" | "isNotNull";
+                            } | {
+                                field: string;
+                                /**
+                                 * inLastDays
+                                 * @constant
+                                 */
+                                operator: "inLastDays";
+                                value: number;
                             })[];
                         }[];
                         items: {
@@ -5300,6 +5985,13 @@ export interface operations {
                                 name: string;
                                 amount: number;
                                 quantity: number;
+                            }[];
+                            tasks: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
                             }[];
                             /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
                             customFieldValues: {
@@ -5384,7 +6076,7 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -5396,7 +6088,31 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateTimeRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -5407,7 +6123,7 @@ export interface operations {
                             type: "link";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -5420,7 +6136,7 @@ export interface operations {
                             type: "currency";
                             options: {
                                 /** @enum {string} */
-                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf";
+                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf" | "sek" | "nok" | "dkk" | "pln" | "czk" | "huf" | "try" | "twd" | "zar" | "mxn" | "krw" | "hkd" | "sgd" | "nzd" | "aed" | "sar" | "ils";
                             };
                         } | {
                             /** Format: uuid */
@@ -5435,7 +6151,7 @@ export interface operations {
                                     value: string;
                                     label: string;
                                     /** @enum {string} */
-                                    color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                    color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                     isDefault: boolean;
                                     index: number;
                                 }[];
@@ -5450,7 +6166,7 @@ export interface operations {
                             type: "email";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -5463,16 +6179,20 @@ export interface operations {
                             type: "phone";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         })[];
                         filterableFields: {
                             field: string;
-                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome")[];
+                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome" | "inLastDays")[];
                             label?: string;
                         }[];
-                        sortableFields: string[];
+                        sortableFields: {
+                            field: string;
+                            label?: string;
+                            columnType?: string;
+                        }[];
                     };
                 };
             };
@@ -5569,6 +6289,13 @@ export interface operations {
                                 amount: number;
                                 quantity: number;
                             }[];
+                            tasks: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
+                            }[];
                             /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
                             customFieldValues: {
                                 /** Format: uuid */
@@ -5595,7 +6322,7 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -5607,7 +6334,31 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateTimeRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -5618,7 +6369,7 @@ export interface operations {
                             type: "link";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -5631,7 +6382,7 @@ export interface operations {
                             type: "currency";
                             options: {
                                 /** @enum {string} */
-                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf";
+                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf" | "sek" | "nok" | "dkk" | "pln" | "czk" | "huf" | "try" | "twd" | "zar" | "mxn" | "krw" | "hkd" | "sgd" | "nzd" | "aed" | "sar" | "ils";
                             };
                         } | {
                             /** Format: uuid */
@@ -5646,7 +6397,7 @@ export interface operations {
                                     value: string;
                                     label: string;
                                     /** @enum {string} */
-                                    color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                    color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                     isDefault: boolean;
                                     index: number;
                                 }[];
@@ -5661,7 +6412,7 @@ export interface operations {
                             type: "email";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -5674,7 +6425,7 @@ export interface operations {
                             type: "phone";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         })[];
@@ -5743,6 +6494,7 @@ export interface operations {
                         /** @default 1 */
                         quantity?: number;
                     }[] | null;
+                    taskIds?: string[] | null;
                     customFieldValues?: {
                         /** Format: uuid */
                         columnId: string;
@@ -5794,6 +6546,13 @@ export interface operations {
                             name: string;
                             amount: number;
                             quantity: number;
+                        }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
                         }[];
                         /** @description Custom field values for this deal. Query available custom field configurations via GET /v1/deals/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -5942,6 +6701,13 @@ export interface operations {
                             id: string;
                             name: string;
                         }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
+                        }[];
                         /** @description Custom field values for this service. Query available custom field configurations via GET /v1/services/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
                             /** Format: uuid */
@@ -6031,6 +6797,13 @@ export interface operations {
                             id: string;
                             name: string;
                         }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
+                        }[];
                         /** @description Custom field values for this service. Query available custom field configurations via GET /v1/services/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
                             /** Format: uuid */
@@ -6119,6 +6892,13 @@ export interface operations {
                             /** Format: uuid */
                             id: string;
                             name: string;
+                        }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
                         }[];
                         /** @description Custom field values for this service. Query available custom field configurations via GET /v1/services/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -6243,11 +7023,19 @@ export interface operations {
                         value: string;
                     } | {
                         field: string;
-                        operator: "in" | "notIn" | "between";
+                        operator: "in" | "notIn" | "between" | "hasNone" | "hasSome";
                         value: string[];
                     } | {
                         field: string;
-                        operator: "isNull" | "isNotNull" | "hasNone" | "hasSome";
+                        operator: "isNull" | "isNotNull";
+                    } | {
+                        field: string;
+                        /**
+                         * inLastDays
+                         * @constant
+                         */
+                        operator: "inLastDays";
+                        value: number;
                     })[];
                     searchTerm?: string;
                     sortDescriptor?: {
@@ -6289,7 +7077,7 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -6301,7 +7089,31 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateTimeRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -6312,7 +7124,7 @@ export interface operations {
                             type: "link";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -6325,7 +7137,7 @@ export interface operations {
                             type: "currency";
                             options: {
                                 /** @enum {string} */
-                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf";
+                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf" | "sek" | "nok" | "dkk" | "pln" | "czk" | "huf" | "try" | "twd" | "zar" | "mxn" | "krw" | "hkd" | "sgd" | "nzd" | "aed" | "sar" | "ils";
                             };
                         } | {
                             /** Format: uuid */
@@ -6340,7 +7152,7 @@ export interface operations {
                                     value: string;
                                     label: string;
                                     /** @enum {string} */
-                                    color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                    color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                     isDefault: boolean;
                                     index: number;
                                 }[];
@@ -6355,7 +7167,7 @@ export interface operations {
                             type: "email";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -6368,7 +7180,7 @@ export interface operations {
                             type: "phone";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         })[];
@@ -6378,11 +7190,19 @@ export interface operations {
                             value: string;
                         } | {
                             field: string;
-                            operator: "in" | "notIn" | "between";
+                            operator: "in" | "notIn" | "between" | "hasNone" | "hasSome";
                             value: string[];
                         } | {
                             field: string;
-                            operator: "isNull" | "isNotNull" | "hasNone" | "hasSome";
+                            operator: "isNull" | "isNotNull";
+                        } | {
+                            field: string;
+                            /**
+                             * inLastDays
+                             * @constant
+                             */
+                            operator: "inLastDays";
+                            value: number;
                         })[];
                         searchTerm?: string;
                         sortDescriptor?: {
@@ -6398,7 +7218,7 @@ export interface operations {
                         };
                         filterableFields?: {
                             field: string;
-                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome")[];
+                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome" | "inLastDays")[];
                             label?: string;
                         }[];
                         savedFilterPresets?: {
@@ -6411,11 +7231,19 @@ export interface operations {
                                 value: string;
                             } | {
                                 field: string;
-                                operator: "in" | "notIn" | "between";
+                                operator: "in" | "notIn" | "between" | "hasNone" | "hasSome";
                                 value: string[];
                             } | {
                                 field: string;
-                                operator: "isNull" | "isNotNull" | "hasNone" | "hasSome";
+                                operator: "isNull" | "isNotNull";
+                            } | {
+                                field: string;
+                                /**
+                                 * inLastDays
+                                 * @constant
+                                 */
+                                operator: "inLastDays";
+                                value: number;
                             })[];
                         }[];
                         items: {
@@ -6440,6 +7268,13 @@ export interface operations {
                                 /** Format: uuid */
                                 id: string;
                                 name: string;
+                            }[];
+                            tasks: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
                             }[];
                             /** @description Custom field values for this service. Query available custom field configurations via GET /v1/services/configuration, which returns customColumns with their definitions. */
                             customFieldValues: {
@@ -6524,7 +7359,7 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -6536,7 +7371,31 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateTimeRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -6547,7 +7406,7 @@ export interface operations {
                             type: "link";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -6560,7 +7419,7 @@ export interface operations {
                             type: "currency";
                             options: {
                                 /** @enum {string} */
-                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf";
+                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf" | "sek" | "nok" | "dkk" | "pln" | "czk" | "huf" | "try" | "twd" | "zar" | "mxn" | "krw" | "hkd" | "sgd" | "nzd" | "aed" | "sar" | "ils";
                             };
                         } | {
                             /** Format: uuid */
@@ -6575,7 +7434,7 @@ export interface operations {
                                     value: string;
                                     label: string;
                                     /** @enum {string} */
-                                    color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                    color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                     isDefault: boolean;
                                     index: number;
                                 }[];
@@ -6590,7 +7449,7 @@ export interface operations {
                             type: "email";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -6603,16 +7462,20 @@ export interface operations {
                             type: "phone";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         })[];
                         filterableFields: {
                             field: string;
-                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome")[];
+                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome" | "inLastDays")[];
                             label?: string;
                         }[];
-                        sortableFields: string[];
+                        sortableFields: {
+                            field: string;
+                            label?: string;
+                            columnType?: string;
+                        }[];
                     };
                 };
             };
@@ -6695,6 +7558,13 @@ export interface operations {
                                 id: string;
                                 name: string;
                             }[];
+                            tasks: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                /** @enum {string} */
+                                type: "userPendingAuthorization" | "custom";
+                            }[];
                             /** @description Custom field values for this service. Query available custom field configurations via GET /v1/services/configuration, which returns customColumns with their definitions. */
                             customFieldValues: {
                                 /** Format: uuid */
@@ -6721,7 +7591,7 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -6733,7 +7603,31 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateTimeRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -6744,7 +7638,7 @@ export interface operations {
                             type: "link";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -6757,7 +7651,7 @@ export interface operations {
                             type: "currency";
                             options: {
                                 /** @enum {string} */
-                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf";
+                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf" | "sek" | "nok" | "dkk" | "pln" | "czk" | "huf" | "try" | "twd" | "zar" | "mxn" | "krw" | "hkd" | "sgd" | "nzd" | "aed" | "sar" | "ils";
                             };
                         } | {
                             /** Format: uuid */
@@ -6772,7 +7666,7 @@ export interface operations {
                                     value: string;
                                     label: string;
                                     /** @enum {string} */
-                                    color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                    color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                     isDefault: boolean;
                                     index: number;
                                 }[];
@@ -6787,7 +7681,7 @@ export interface operations {
                             type: "email";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -6800,7 +7694,7 @@ export interface operations {
                             type: "phone";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         })[];
@@ -6863,6 +7757,7 @@ export interface operations {
                     notes?: unknown | null;
                     userIds?: string[] | null;
                     dealIds?: string[] | null;
+                    taskIds?: string[] | null;
                     customFieldValues?: {
                         /** Format: uuid */
                         columnId: string;
@@ -6900,6 +7795,13 @@ export interface operations {
                             /** Format: uuid */
                             id: string;
                             name: string;
+                        }[];
+                        tasks: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "userPendingAuthorization" | "custom";
                         }[];
                         /** @description Custom field values for this service. Query available custom field configurations via GET /v1/services/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -7030,7 +7932,7 @@ export interface operations {
                         id: string;
                         name: string;
                         /** @enum {string} */
-                        type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                        type: "userPendingAuthorization" | "custom";
                         /** @description Markdown content */
                         notes?: unknown | null;
                         createdAt: string;
@@ -7043,6 +7945,28 @@ export interface operations {
                             avatarUrl: string | null;
                             /** Format: email */
                             email: string;
+                        }[];
+                        contacts: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                        }[];
+                        organizations: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        deals: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        services: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            amount: number;
                         }[];
                         /** @description Custom field values for this task. Query available custom field configurations via GET /v1/tasks/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -7115,7 +8039,7 @@ export interface operations {
                         id: string;
                         name: string;
                         /** @enum {string} */
-                        type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                        type: "userPendingAuthorization" | "custom";
                         /** @description Markdown content */
                         notes?: unknown | null;
                         createdAt: string;
@@ -7128,6 +8052,28 @@ export interface operations {
                             avatarUrl: string | null;
                             /** Format: email */
                             email: string;
+                        }[];
+                        contacts: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                        }[];
+                        organizations: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        deals: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        services: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            amount: number;
                         }[];
                         /** @description Custom field values for this task. Query available custom field configurations via GET /v1/tasks/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -7200,7 +8146,7 @@ export interface operations {
                         id: string;
                         name: string;
                         /** @enum {string} */
-                        type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                        type: "userPendingAuthorization" | "custom";
                         /** @description Markdown content */
                         notes?: unknown | null;
                         createdAt: string;
@@ -7213,6 +8159,28 @@ export interface operations {
                             avatarUrl: string | null;
                             /** Format: email */
                             email: string;
+                        }[];
+                        contacts: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                        }[];
+                        organizations: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        deals: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        services: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            amount: number;
                         }[];
                         /** @description Custom field values for this task. Query available custom field configurations via GET /v1/tasks/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {
@@ -7337,11 +8305,19 @@ export interface operations {
                         value: string;
                     } | {
                         field: string;
-                        operator: "in" | "notIn" | "between";
+                        operator: "in" | "notIn" | "between" | "hasNone" | "hasSome";
                         value: string[];
                     } | {
                         field: string;
-                        operator: "isNull" | "isNotNull" | "hasNone" | "hasSome";
+                        operator: "isNull" | "isNotNull";
+                    } | {
+                        field: string;
+                        /**
+                         * inLastDays
+                         * @constant
+                         */
+                        operator: "inLastDays";
+                        value: number;
                     })[];
                     searchTerm?: string;
                     sortDescriptor?: {
@@ -7383,7 +8359,7 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -7395,7 +8371,31 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateTimeRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -7406,7 +8406,7 @@ export interface operations {
                             type: "link";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -7419,7 +8419,7 @@ export interface operations {
                             type: "currency";
                             options: {
                                 /** @enum {string} */
-                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf";
+                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf" | "sek" | "nok" | "dkk" | "pln" | "czk" | "huf" | "try" | "twd" | "zar" | "mxn" | "krw" | "hkd" | "sgd" | "nzd" | "aed" | "sar" | "ils";
                             };
                         } | {
                             /** Format: uuid */
@@ -7434,7 +8434,7 @@ export interface operations {
                                     value: string;
                                     label: string;
                                     /** @enum {string} */
-                                    color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                    color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                     isDefault: boolean;
                                     index: number;
                                 }[];
@@ -7449,7 +8449,7 @@ export interface operations {
                             type: "email";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -7462,7 +8462,7 @@ export interface operations {
                             type: "phone";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         })[];
@@ -7472,11 +8472,19 @@ export interface operations {
                             value: string;
                         } | {
                             field: string;
-                            operator: "in" | "notIn" | "between";
+                            operator: "in" | "notIn" | "between" | "hasNone" | "hasSome";
                             value: string[];
                         } | {
                             field: string;
-                            operator: "isNull" | "isNotNull" | "hasNone" | "hasSome";
+                            operator: "isNull" | "isNotNull";
+                        } | {
+                            field: string;
+                            /**
+                             * inLastDays
+                             * @constant
+                             */
+                            operator: "inLastDays";
+                            value: number;
                         })[];
                         searchTerm?: string;
                         sortDescriptor?: {
@@ -7492,7 +8500,7 @@ export interface operations {
                         };
                         filterableFields?: {
                             field: string;
-                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome")[];
+                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome" | "inLastDays")[];
                             label?: string;
                         }[];
                         savedFilterPresets?: {
@@ -7505,11 +8513,19 @@ export interface operations {
                                 value: string;
                             } | {
                                 field: string;
-                                operator: "in" | "notIn" | "between";
+                                operator: "in" | "notIn" | "between" | "hasNone" | "hasSome";
                                 value: string[];
                             } | {
                                 field: string;
-                                operator: "isNull" | "isNotNull" | "hasNone" | "hasSome";
+                                operator: "isNull" | "isNotNull";
+                            } | {
+                                field: string;
+                                /**
+                                 * inLastDays
+                                 * @constant
+                                 */
+                                operator: "inLastDays";
+                                value: number;
                             })[];
                         }[];
                         items: {
@@ -7517,7 +8533,7 @@ export interface operations {
                             id: string;
                             name: string;
                             /** @enum {string} */
-                            type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                            type: "userPendingAuthorization" | "custom";
                             /** @description Markdown content */
                             notes?: unknown | null;
                             createdAt: string;
@@ -7530,6 +8546,28 @@ export interface operations {
                                 avatarUrl: string | null;
                                 /** Format: email */
                                 email: string;
+                            }[];
+                            contacts: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                            }[];
+                            organizations: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                            deals: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                            services: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                amount: number;
                             }[];
                             /** @description Custom field values for this task. Query available custom field configurations via GET /v1/tasks/configuration, which returns customColumns with their definitions. */
                             customFieldValues: {
@@ -7614,7 +8652,7 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -7626,7 +8664,31 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateTimeRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -7637,7 +8699,7 @@ export interface operations {
                             type: "link";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -7650,7 +8712,7 @@ export interface operations {
                             type: "currency";
                             options: {
                                 /** @enum {string} */
-                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf";
+                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf" | "sek" | "nok" | "dkk" | "pln" | "czk" | "huf" | "try" | "twd" | "zar" | "mxn" | "krw" | "hkd" | "sgd" | "nzd" | "aed" | "sar" | "ils";
                             };
                         } | {
                             /** Format: uuid */
@@ -7665,7 +8727,7 @@ export interface operations {
                                     value: string;
                                     label: string;
                                     /** @enum {string} */
-                                    color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                    color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                     isDefault: boolean;
                                     index: number;
                                 }[];
@@ -7680,7 +8742,7 @@ export interface operations {
                             type: "email";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -7693,16 +8755,20 @@ export interface operations {
                             type: "phone";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         })[];
                         filterableFields: {
                             field: string;
-                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome")[];
+                            operators: ("equals" | "contains" | "in" | "notIn" | "gt" | "gte" | "lt" | "lte" | "between" | "isNull" | "isNotNull" | "hasNone" | "hasSome" | "inLastDays")[];
                             label?: string;
                         }[];
-                        sortableFields: string[];
+                        sortableFields: {
+                            field: string;
+                            label?: string;
+                            columnType?: string;
+                        }[];
                     };
                 };
             };
@@ -7767,7 +8833,7 @@ export interface operations {
                             id: string;
                             name: string;
                             /** @enum {string} */
-                            type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                            type: "userPendingAuthorization" | "custom";
                             /** @description Markdown content */
                             notes?: unknown | null;
                             createdAt: string;
@@ -7780,6 +8846,28 @@ export interface operations {
                                 avatarUrl: string | null;
                                 /** Format: email */
                                 email: string;
+                            }[];
+                            contacts: {
+                                /** Format: uuid */
+                                id: string;
+                                firstName: string;
+                                lastName: string;
+                            }[];
+                            organizations: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                            deals: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                            services: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                                amount: number;
                             }[];
                             /** @description Custom field values for this task. Query available custom field configurations via GET /v1/tasks/configuration, which returns customColumns with their definitions. */
                             customFieldValues: {
@@ -7807,7 +8895,7 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -7819,7 +8907,31 @@ export interface operations {
                             options?: {
                                 /** @enum {string} */
                                 displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
-                            };
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
+                        } | {
+                            /** Format: uuid */
+                            id: string;
+                            label: string;
+                            /** @enum {string} */
+                            entityType: "contact" | "organization" | "deal" | "service" | "task";
+                            /** @constant */
+                            type: "dateTimeRange";
+                            options?: {
+                                /** @enum {string} */
+                                displayFormat: "numericalLong" | "numericalShort" | "descriptiveShort" | "descriptiveLong" | "relative";
+                            } | null;
                         } | {
                             /** Format: uuid */
                             id: string;
@@ -7830,7 +8942,7 @@ export interface operations {
                             type: "link";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -7843,7 +8955,7 @@ export interface operations {
                             type: "currency";
                             options: {
                                 /** @enum {string} */
-                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf";
+                                currency: "eur" | "usd" | "gbp" | "jpy" | "cny" | "inr" | "brl" | "cad" | "aud" | "chf" | "sek" | "nok" | "dkk" | "pln" | "czk" | "huf" | "try" | "twd" | "zar" | "mxn" | "krw" | "hkd" | "sgd" | "nzd" | "aed" | "sar" | "ils";
                             };
                         } | {
                             /** Format: uuid */
@@ -7858,7 +8970,7 @@ export interface operations {
                                     value: string;
                                     label: string;
                                     /** @enum {string} */
-                                    color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                    color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                     isDefault: boolean;
                                     index: number;
                                 }[];
@@ -7873,7 +8985,7 @@ export interface operations {
                             type: "email";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         } | {
@@ -7886,7 +8998,7 @@ export interface operations {
                             type: "phone";
                             options: {
                                 /** @enum {string} */
-                                color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+                                color: "default" | "secondary" | "destructive" | "success" | "warning" | "info";
                                 allowMultiple: boolean;
                             };
                         })[];
@@ -7947,6 +9059,10 @@ export interface operations {
                     /** @description Markdown content */
                     notes?: unknown | null;
                     userIds?: string[] | null;
+                    contactIds?: string[] | null;
+                    organizationIds?: string[] | null;
+                    dealIds?: string[] | null;
+                    serviceIds?: string[] | null;
                     customFieldValues?: {
                         /** Format: uuid */
                         columnId: string;
@@ -7967,7 +9083,7 @@ export interface operations {
                         id: string;
                         name: string;
                         /** @enum {string} */
-                        type: "userPendingAuthorization" | "companyOnboarding" | "custom";
+                        type: "userPendingAuthorization" | "custom";
                         /** @description Markdown content */
                         notes?: unknown | null;
                         createdAt: string;
@@ -7980,6 +9096,28 @@ export interface operations {
                             avatarUrl: string | null;
                             /** Format: email */
                             email: string;
+                        }[];
+                        contacts: {
+                            /** Format: uuid */
+                            id: string;
+                            firstName: string;
+                            lastName: string;
+                        }[];
+                        organizations: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        deals: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        services: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            amount: number;
                         }[];
                         /** @description Custom field values for this task. Query available custom field configurations via GET /v1/tasks/configuration, which returns customColumns with their definitions. */
                         customFieldValues: {

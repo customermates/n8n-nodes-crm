@@ -3,6 +3,7 @@ export { loadOrganizationOptions } from './loadOrganizationOptions';
 export { loadDealOptions } from './loadDealOptions';
 export { loadContactOptions } from './loadContactOptions';
 export { loadServiceOptions } from './loadServiceOptions';
+export { loadTaskOptions } from './loadTaskOptions';
 export { loadContactCustomColumnOptions } from './loadContactCustomColumnOptions';
 export { loadOrganizationCustomColumnOptions } from './loadOrganizationCustomColumnOptions';
 export { loadDealCustomColumnOptions } from './loadDealCustomColumnOptions';

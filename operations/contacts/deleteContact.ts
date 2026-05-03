@@ -4,7 +4,7 @@ import type {
 	INodeExecutionData,
 	INodeProperties,
 } from 'n8n-workflow';
-import { BASE_URL } from '../../constants';
+import { getBaseURL } from '../../helpers/getBaseURL';
 import type { paths } from '../../lib/generated/types';
 
 type DeleteResponse =
@@ -19,7 +19,7 @@ export async function deleteContact(
 
 	const id = (await this.helpers.httpRequest({
 		method: 'DELETE',
-		url: `${BASE_URL}/api/v1/contacts/${contactId}`,
+		url: `${getBaseURL(credentials)}/api/v1/contacts/${contactId}`,
 		headers: {
 			'x-api-key': credentials.apiKey as string,
 			Accept: 'application/json',

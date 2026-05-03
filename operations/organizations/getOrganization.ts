@@ -6,7 +6,7 @@ import type {
 	INodeProperties,
 } from 'n8n-workflow';
 import { NodeOperationError } from 'n8n-workflow';
-import { BASE_URL } from '../../constants';
+import { getBaseURL } from '../../helpers/getBaseURL';
 import type { paths } from '../../lib/generated/types';
 
 type GetOrganizationSuccessResponse =
@@ -21,7 +21,7 @@ export async function getOrganization(
 
 	const response = (await this.helpers.httpRequest({
 		method: 'GET',
-		url: `${BASE_URL}/api/v1/organizations/${organizationId}`,
+		url: `${getBaseURL(credentials)}/api/v1/organizations/${organizationId}`,
 		headers: {
 			'x-api-key': credentials.apiKey as string,
 			Accept: 'application/json',

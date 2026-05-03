@@ -6,7 +6,7 @@ import type {
 	INodeProperties,
 } from 'n8n-workflow';
 import { NodeOperationError } from 'n8n-workflow';
-import { BASE_URL } from '../../constants';
+import { getBaseURL } from '../../helpers/getBaseURL';
 import type { paths } from '../../lib/generated/types';
 
 type UpdateRequest = NonNullable<
@@ -26,6 +26,7 @@ export async function updateOrganization(
 		contactIds?: string[];
 		userIds?: string[];
 		dealIds?: string[];
+		taskIds?: string[];
 		customFieldValues?: {
 			field?: Array<{
 				columnId: string;
@@ -48,6 +49,9 @@ export async function updateOrganization(
 	if (updateFields.dealIds !== undefined) {
 		requestBody.dealIds = updateFields.dealIds;
 	}
+	if (updateFields.taskIds !== undefined) {
+		requestBody.taskIds = updateFields.taskIds;
+	}
 	if (updateFields.customFieldValues?.field !== undefined) {
 		const seenColumnIds = new Set<string>();
 		requestBody.customFieldValues = updateFields.customFieldValues.field.filter((field) => {
@@ -69,7 +73,7 @@ export async function updateOrganization(
 
 	const response = (await this.helpers.httpRequest({
 		method: 'PUT',
-		url: `${BASE_URL}/api/v1/organizations/${organizationId}`,
+		url: `${getBaseURL(credentials)}/api/v1/organizations/${organizationId}`,
 		headers: {
 			'x-api-key': credentials.apiKey as string,
 			'Content-Type': 'application/json',
@@ -153,6 +157,17 @@ export const updateOrganizationProperties: INodeProperties[] = [
 				default: [],
 				description:
 					'The deals to associate with this organization. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+			},
+			{
+				displayName: 'Task Names or IDs',
+				name: 'taskIds',
+				type: 'multiOptions',
+				typeOptions: {
+					loadOptionsMethod: 'loadTaskOptions',
+				},
+				default: [],
+				description:
+					'The tasks to associate with this organization. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 			},
 			{
 				displayName: 'Custom Field Values',

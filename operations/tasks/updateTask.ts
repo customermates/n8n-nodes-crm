@@ -6,7 +6,7 @@ import type {
 	INodeProperties,
 } from 'n8n-workflow';
 import { NodeOperationError } from 'n8n-workflow';
-import { BASE_URL } from '../../constants';
+import { getBaseURL } from '../../helpers/getBaseURL';
 import type { paths } from '../../lib/generated/types';
 
 type UpdateRequest = NonNullable<
@@ -24,6 +24,10 @@ export async function updateTask(
 	const updateFields = this.getNodeParameter('updateFields', itemIndex, {}) as {
 		name?: string;
 		userIds?: string[];
+		contactIds?: string[];
+		organizationIds?: string[];
+		dealIds?: string[];
+		serviceIds?: string[];
 		customFieldValues?: {
 			field?: Array<{
 				columnId: string;
@@ -39,6 +43,18 @@ export async function updateTask(
 	}
 	if (updateFields.userIds !== undefined) {
 		requestBody.userIds = updateFields.userIds;
+	}
+	if (updateFields.contactIds !== undefined) {
+		requestBody.contactIds = updateFields.contactIds;
+	}
+	if (updateFields.organizationIds !== undefined) {
+		requestBody.organizationIds = updateFields.organizationIds;
+	}
+	if (updateFields.dealIds !== undefined) {
+		requestBody.dealIds = updateFields.dealIds;
+	}
+	if (updateFields.serviceIds !== undefined) {
+		requestBody.serviceIds = updateFields.serviceIds;
 	}
 	if (updateFields.customFieldValues?.field !== undefined) {
 		const seenColumnIds = new Set<string>();
@@ -61,7 +77,7 @@ export async function updateTask(
 
 	const response = (await this.helpers.httpRequest({
 		method: 'PUT',
-		url: `${BASE_URL}/api/v1/tasks/${taskId}`,
+		url: `${getBaseURL(credentials)}/api/v1/tasks/${taskId}`,
 		headers: {
 			'x-api-key': credentials.apiKey as string,
 			'Content-Type': 'application/json',
@@ -123,6 +139,50 @@ export const updateTaskProperties: INodeProperties[] = [
 				default: [],
 				description:
 					'The users to associate with this task. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+			},
+			{
+				displayName: 'Contact Names or IDs',
+				name: 'contactIds',
+				type: 'multiOptions',
+				typeOptions: {
+					loadOptionsMethod: 'loadContactOptions',
+				},
+				default: [],
+				description:
+					'The contacts to associate with this task. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+			},
+			{
+				displayName: 'Organization Names or IDs',
+				name: 'organizationIds',
+				type: 'multiOptions',
+				typeOptions: {
+					loadOptionsMethod: 'loadOrganizationOptions',
+				},
+				default: [],
+				description:
+					'The organizations to associate with this task. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+			},
+			{
+				displayName: 'Deal Names or IDs',
+				name: 'dealIds',
+				type: 'multiOptions',
+				typeOptions: {
+					loadOptionsMethod: 'loadDealOptions',
+				},
+				default: [],
+				description:
+					'The deals to associate with this task. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+			},
+			{
+				displayName: 'Service Names or IDs',
+				name: 'serviceIds',
+				type: 'multiOptions',
+				typeOptions: {
+					loadOptionsMethod: 'loadServiceOptions',
+				},
+				default: [],
+				description:
+					'The services to associate with this task. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 			},
 			{
 				displayName: 'Custom Field Values',

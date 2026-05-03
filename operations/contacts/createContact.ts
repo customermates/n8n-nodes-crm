@@ -5,7 +5,7 @@ import type {
 	INodeExecutionData,
 	INodeProperties,
 } from 'n8n-workflow';
-import { BASE_URL } from '../../constants';
+import { getBaseURL } from '../../helpers/getBaseURL';
 import type { paths } from '../../lib/generated/types';
 
 type CreateRequest = NonNullable<
@@ -22,9 +22,11 @@ export async function createContact(
 	const firstName = this.getNodeParameter('firstName', itemIndex) as string;
 	const lastName = this.getNodeParameter('lastName', itemIndex) as string;
 	const additionalFields = this.getNodeParameter('additionalFields', itemIndex, {}) as {
+		emails?: string;
 		organizationIds?: string[];
 		userIds?: string[];
 		dealIds?: string[];
+		taskIds?: string[];
 		customFieldValues?: {
 			field?: Array<{
 				columnId: string;
@@ -36,15 +38,22 @@ export async function createContact(
 	const requestBody: CreateRequest = {
 		firstName,
 		lastName,
+		emails: additionalFields.emails
+			? additionalFields.emails
+					.split(',')
+					.map((email) => email.trim())
+					.filter((email) => email.length > 0)
+			: [],
 		organizationIds: additionalFields.organizationIds || [],
 		userIds: additionalFields.userIds || [],
 		dealIds: additionalFields.dealIds || [],
+		taskIds: additionalFields.taskIds || [],
 		customFieldValues: additionalFields.customFieldValues?.field || [],
 	};
 
 	const response = (await this.helpers.httpRequest({
 		method: 'POST',
-		url: `${BASE_URL}/api/v1/contacts`,
+		url: `${getBaseURL(credentials)}/api/v1/contacts`,
 		headers: {
 			'x-api-key': credentials.apiKey as string,
 			'Content-Type': 'application/json',
@@ -103,6 +112,14 @@ export const createContactProperties: INodeProperties[] = [
 		default: {},
 		options: [
 			{
+				displayName: 'Emails',
+				name: 'emails',
+				type: 'string',
+				default: '',
+				placeholder: 'jane@example.com, jane.smith@example.com',
+				description: 'Comma-separated list of email addresses for this contact',
+			},
+			{
 				displayName: 'Organization Names or IDs',
 				name: 'organizationIds',
 				type: 'multiOptions',
@@ -134,6 +151,17 @@ export const createContactProperties: INodeProperties[] = [
 				default: [],
 				description:
 					'The deals to associate with this contact. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+			},
+			{
+				displayName: 'Task Names or IDs',
+				name: 'taskIds',
+				type: 'multiOptions',
+				typeOptions: {
+					loadOptionsMethod: 'loadTaskOptions',
+				},
+				default: [],
+				description:
+					'The tasks to associate with this contact. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 			},
 			{
 				displayName: 'Custom Field Values',

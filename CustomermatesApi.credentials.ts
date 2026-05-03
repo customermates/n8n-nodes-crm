@@ -26,6 +26,15 @@ export class CustomermatesApi implements ICredentialType {
 			default: '',
 			description: 'Customermates API key',
 		},
+		{
+			displayName: 'Base URL',
+			name: 'baseURL',
+			type: 'string',
+			default: BASE_URL,
+			placeholder: 'https://customermates.com',
+			description:
+				'Base URL of the Customermates instance. Use the default for the hosted Cloud, or your own URL for self-hosted (e.g. https://crm.example.com).',
+		},
 	];
 
 	authenticate: IAuthenticateGeneric = {
@@ -39,7 +48,7 @@ export class CustomermatesApi implements ICredentialType {
 
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: BASE_URL,
+			baseURL: '={{$credentials.baseURL || "https://customermates.com"}}',
 			url: '/api/v1/users/me',
 		},
 	};

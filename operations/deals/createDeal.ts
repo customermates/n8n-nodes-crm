@@ -5,7 +5,7 @@ import type {
 	INodeExecutionData,
 	INodeProperties,
 } from 'n8n-workflow';
-import { BASE_URL } from '../../constants';
+import { getBaseURL } from '../../helpers/getBaseURL';
 import type { paths } from '../../lib/generated/types';
 
 type CreateRequest = NonNullable<
@@ -24,6 +24,7 @@ export async function createDeal(
 		organizationIds?: string[];
 		userIds?: string[];
 		contactIds?: string[];
+		taskIds?: string[];
 		services?: {
 			service?: Array<{
 				serviceId: string;
@@ -43,13 +44,14 @@ export async function createDeal(
 		organizationIds: additionalFields.organizationIds || [],
 		userIds: additionalFields.userIds || [],
 		contactIds: additionalFields.contactIds || [],
+		taskIds: additionalFields.taskIds || [],
 		services: additionalFields.services?.service || [],
 		customFieldValues: additionalFields.customFieldValues?.field || [],
 	};
 
 	const response = (await this.helpers.httpRequest({
 		method: 'POST',
-		url: `${BASE_URL}/api/v1/deals`,
+		url: `${getBaseURL(credentials)}/api/v1/deals`,
 		headers: {
 			'x-api-key': credentials.apiKey as string,
 			'Content-Type': 'application/json',
@@ -125,6 +127,17 @@ export const createDealProperties: INodeProperties[] = [
 				default: [],
 				description:
 					'The contacts to associate with this deal. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+			},
+			{
+				displayName: 'Task Names or IDs',
+				name: 'taskIds',
+				type: 'multiOptions',
+				typeOptions: {
+					loadOptionsMethod: 'loadTaskOptions',
+				},
+				default: [],
+				description:
+					'The tasks to associate with this deal. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 			},
 			{
 				displayName: 'Services',
