@@ -28,7 +28,7 @@
 		"CustomermatesTrigger.node.ts",
 		"CustomermatesTrigger.node.json",
 		"operations/**/*",
-		"package.json",
-		"lib/**/*"
+		"helpers/**/*",
+		"package.json"
 	]
 }

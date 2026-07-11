@@ -1,6 +1,6 @@
 # @customermates/n8n-nodes-crm
 
-This is an n8n community node package for [Customermates](https://customermates.com), a modern CRM for small businesses. It enables you to integrate Customermates into your n8n workflows, allowing you to automate contact management, organization tracking, deal management, service operations, and task management.
+This is an n8n community node package for [Customermates](https://customermates.com), a modern CRM for small businesses. It enables you to integrate Customermates into your n8n workflows, allowing you to automate contact management, organization tracking, deal management, service operations, task management, and messaging across connected accounts (email, LinkedIn, WhatsApp, and more).
 
 Customermates is a clean, modern CRM designed for small teams. It's ready to use in 2 minutes, requires no training, is fully GDPR-compliant, and offers powerful automation capabilities through n8n. Made in Germany with data stored in German data centers.
 
@@ -12,7 +12,9 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Operations
 
-The Customermates node supports the following operations:
+### CRM Resources
+
+Contacts, Organizations, Deals, Services, and Tasks each support:
 
 - **Create** - Create a new record
 - **Get** - Retrieve a single record by ID
@@ -20,13 +22,23 @@ The Customermates node supports the following operations:
 - **Update** - Update existing record information
 - **Delete** - Delete a record by ID
 
-### Available Resources
+Contacts additionally support **messaging channels** on Create and Update: link email addresses, LinkedIn profiles, WhatsApp numbers, Instagram or Telegram handles to a contact. On Update, the provided channel list replaces the complete channel set; omit it to leave channels unchanged.
 
-- **Contacts** - Manage contacts with organizations, users, deals, and custom fields
-- **Organizations** - Manage organizations with contacts, users, deals, and custom fields
-- **Deals** - Manage deals with organizations, users, contacts, services, and custom fields
-- **Services** - Manage services with users, deals, and custom fields
-- **Tasks** - Manage tasks with users and custom fields
+### Messaging
+
+- **Get Connected Accounts** - List the messaging accounts connected in Customermates
+- **Get Thread** - Get a conversation thread with its messages
+- **Get Many Threads** - Search conversation threads
+- **Send Chat Message** - Send a chat message in an existing thread
+- **Send Email** - Send an email from a connected account
+- **Start Chat** - Start a new chat conversation (WhatsApp, LinkedIn incl. InMail/Sales Navigator/Recruiter, Instagram, Telegram)
+
+### Social Relation
+
+- **Get Many** - List received or sent connection requests of a connected LinkedIn or Instagram account
+- **Send Invitation** - Send a connection request, optionally with a message
+- **Accept Invitation** - Accept a received connection request
+- **Cancel Invitation** - Withdraw a sent or refuse a received connection request
 
 ### Webhook Trigger
 
@@ -37,6 +49,11 @@ The Customermates Trigger node listens for events in Customermates:
 - Deal events: created, updated, deleted
 - Service events: created, updated, deleted
 - Task events: created, updated, deleted
+- Messaging events: message received/updated/deleted, message reaction, email received/deleted, chat updated/deleted
+- Calendar events: calendar changed, calendar event changed
+- Social events: relation created
+
+Deliveries can be verified: set a secret on the webhook in Customermates and enter the same value in the trigger node's **Webhook Secret** field. The node then checks the `X-Webhook-Signature` header (HMAC-SHA-256 of the raw body) and rejects requests that don't match.
 
 ## Credentials
 
@@ -64,7 +81,7 @@ For more information about Customermates API keys, visit the [Customermates docu
 
 1. Add the Customermates node to your workflow
 2. Configure the Customermates credentials with your API key
-3. Select the resource (Contact, Organization, Deal, Service, or Task) and operation (Create, Get, Get Many, Update, or Delete)
+3. Select the resource (Contact, Organization, Deal, Service, Task, Messaging, or Social Relation) and operation
 4. Fill in the required fields for your selected operation
 5. Execute the workflow
 
@@ -72,8 +89,9 @@ For more information about Customermates API keys, visit the [Customermates docu
 
 1. Add the Customermates Trigger node to your workflow
 2. Select which events you want to listen to
-3. Configure the webhook URL in your Customermates account settings
-4. The workflow will trigger automatically when selected events occur
+3. Configure the webhook URL in your Customermates account settings (optionally with a secret)
+4. If you set a secret, enter the same value in the trigger node's Webhook Secret field
+5. The workflow will trigger automatically when selected events occur
 
 ## Resources
 
@@ -88,7 +106,8 @@ Customermates is a modern CRM designed specifically for small businesses. Key fe
 
 - **Quick Setup**: Ready to use in 2 minutes, no training required
 - **Essential Features**: Contacts, Organizations, Deals, Services, and Tasks management
+- **Unified Inbox**: Email, LinkedIn, WhatsApp, Instagram, and Telegram connected to your CRM
 - **n8n Integration**: Fully automatable with custom workflows and AI agents
 - **GDPR Compliant**: All data stored securely in German data centers
-- **Affordable Pricing**: €10 per user with no hidden costs
+- **Affordable Pricing**: €7 per user with no hidden costs
 - **Clean Interface**: Minimalist, intuitive design that's easy to use

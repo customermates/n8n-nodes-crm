@@ -4,7 +4,7 @@ import type {
 	ICredentialType,
 	INodeProperties,
 } from 'n8n-workflow';
-import { BASE_URL } from './constants';
+import { BASE_URL } from './helpers/api';
 
 export class CustomermatesApi implements ICredentialType {
 	name = 'customermatesApi';

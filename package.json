@@ -1,7 +1,7 @@
 {
 	"name": "@customermates/n8n-nodes-crm",
-	"version": "1.1.0",
-	"description": "n8n community node package for Customermates CRM - Modern CRM for small businesses with contacts, organizations, deals, and services management",
+	"version": "1.2.0",
+	"description": "n8n community node package for Customermates CRM - Modern CRM for small businesses with contacts, organizations, deals, services, and messaging (email, LinkedIn, WhatsApp)",
 	"license": "MIT",
 	"homepage": "https://customermates.com",
 	"keywords": [
@@ -27,7 +27,6 @@
 		"url": "https://github.com/customermates/n8n-nodes-crm.git"
 	},
 	"scripts": {
-		"generate-types": "npx -y openapi-typescript https://customermates.com/v1/openapi.json -o lib/generated/types.ts",
 		"build": "n8n-node build",
 		"build:watch": "tsc --watch",
 		"dev": "n8n-node dev",
@@ -54,6 +53,7 @@
 	},
 	"devDependencies": {
 		"@n8n/node-cli": "*",
+		"@types/node": "^26.1.1",
 		"eslint": "9.32.0",
 		"prettier": "3.6.2",
 		"release-it": "^19.0.4",
