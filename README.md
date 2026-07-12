@@ -53,7 +53,7 @@ The Customermates Trigger node listens for events in Customermates:
 - Calendar events: calendar changed, calendar event changed
 - Social events: relation created
 
-Deliveries can be verified: set a secret on the webhook in Customermates and enter the same value in the trigger node's **Webhook Secret** field. The node then checks the `X-Webhook-Signature` header (HMAC-SHA-256 of the raw body) and rejects requests that don't match.
+The trigger registers and removes its webhook automatically when you activate or deactivate the workflow. On activation it generates a signing secret and subscribes to your selected events; every delivery is verified against the `X-Webhook-Signature` header (HMAC-SHA-256 of the raw body) and mismatches are rejected. No manual webhook setup is required.
 
 ## Credentials
 
@@ -89,9 +89,8 @@ For more information about Customermates API keys, visit the [Customermates docu
 
 1. Add the Customermates Trigger node to your workflow
 2. Select which events you want to listen to
-3. Configure the webhook URL in your Customermates account settings (optionally with a secret)
-4. If you set a secret, enter the same value in the trigger node's Webhook Secret field
-5. The workflow will trigger automatically when selected events occur
+3. Activate the workflow — the node registers its webhook in Customermates automatically (and removes it when you deactivate)
+4. The workflow will trigger automatically when selected events occur
 
 ## Resources
 

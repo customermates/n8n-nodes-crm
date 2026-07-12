@@ -1,5 +1,6 @@
-import { createHmac, timingSafeEqual } from 'crypto';
+import { createHmac, randomBytes, timingSafeEqual } from 'crypto';
 import type {
+	IHookFunctions,
 	IWebhookFunctions,
 	IDataObject,
 	INodeType,
@@ -7,6 +8,7 @@ import type {
 	IWebhookResponseData,
 } from 'n8n-workflow';
 import { NodeConnectionTypes } from 'n8n-workflow';
+import { apiRequest } from './helpers/api';
 
 export class CustomermatesTrigger implements INodeType {
 	description: INodeTypeDescription = {
@@ -15,6 +17,7 @@ export class CustomermatesTrigger implements INodeType {
 		icon: 'file:customermates.svg',
 		group: ['trigger'],
 		version: 1,
+		subtitle: '={{$parameter["events"].join(", ")}}',
 		description: 'Starts the workflow when Customermates events occur',
 		defaults: {
 			name: 'Customermates Trigger',
@@ -22,6 +25,12 @@ export class CustomermatesTrigger implements INodeType {
 		inputs: [],
 		outputs: [NodeConnectionTypes.Main],
 		usableAsTool: true,
+		credentials: [
+			{
+				name: 'customermatesApi',
+				required: true,
+			},
+		],
 		webhooks: [
 			{
 				name: 'default',
@@ -150,22 +159,62 @@ export class CustomermatesTrigger implements INodeType {
 					},
 				],
 			},
-			{
-				displayName: 'Webhook Secret',
-				name: 'secret',
-				type: 'string',
-				typeOptions: { password: true },
-				default: '',
-				description:
-					'The secret configured on the webhook in Customermates. When set, the signature of incoming deliveries is verified and non-matching requests are rejected.',
-			},
 		],
+	};
+
+	webhookMethods = {
+		default: {
+			async checkExists(this: IHookFunctions): Promise<boolean> {
+				const webhookData = this.getWorkflowStaticData('node');
+				if (!webhookData.webhookId) {
+					return false;
+				}
+				try {
+					const existing = await apiRequest(this, 'GET', `/webhooks/${webhookData.webhookId}`);
+					return existing != null;
+				} catch {
+					return false;
+				}
+			},
+
+			async create(this: IHookFunctions): Promise<boolean> {
+				const webhookUrl = this.getNodeWebhookUrl('default') as string;
+				const events = this.getNodeParameter('events', []) as string[];
+				const secret = randomBytes(32).toString('hex');
+
+				const created = await apiRequest(this, 'POST', '/webhooks', {
+					url: webhookUrl,
+					events,
+					description: 'n8n trigger',
+					secret,
+				});
+
+				const webhookData = this.getWorkflowStaticData('node');
+				webhookData.webhookId = created.id as string;
+				webhookData.secret = secret;
+				return true;
+			},
+
+			async delete(this: IHookFunctions): Promise<boolean> {
+				const webhookData = this.getWorkflowStaticData('node');
+				if (webhookData.webhookId) {
+					try {
+						await apiRequest(this, 'DELETE', `/webhooks/${webhookData.webhookId}`);
+					} catch {
+						return false;
+					}
+					delete webhookData.webhookId;
+					delete webhookData.secret;
+				}
+				return true;
+			},
+		},
 	};
 
 	async webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
 		const req = this.getRequestObject();
 		const events = this.getNodeParameter('events', []) as string[];
-		const secret = this.getNodeParameter('secret', '') as string;
+		const secret = this.getWorkflowStaticData('node').secret as string | undefined;
 
 		if (secret) {
 			const signature = req.headers['x-webhook-signature'];

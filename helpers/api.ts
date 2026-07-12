@@ -1,6 +1,7 @@
 import type {
 	IDataObject,
 	IExecuteFunctions,
+	IHookFunctions,
 	IHttpRequestMethods,
 	ILoadOptionsFunctions,
 	INodeExecutionData,
@@ -9,7 +10,7 @@ import type {
 export const BASE_URL = 'https://customermates.com';
 
 export async function apiRequest<T = IDataObject>(
-	context: IExecuteFunctions | ILoadOptionsFunctions,
+	context: IExecuteFunctions | ILoadOptionsFunctions | IHookFunctions,
 	method: IHttpRequestMethods,
 	path: string,
 	body?: IDataObject,

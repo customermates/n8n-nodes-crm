@@ -3,8 +3,9 @@ import type {
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
+	JsonObject,
 } from 'n8n-workflow';
-import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
+import { NodeApiError, NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 import type { Handler } from './operations/entities';
 import { entityHandlers, entityProperties } from './operations/entities';
 import { messagingHandlers, messagingProperties } from './operations/messaging';
@@ -105,18 +106,14 @@ export class Customermates implements INodeType {
 			} catch (error) {
 				if (this.continueOnFail()) {
 					returnData.push({
-						json: { error: error.response?.data ?? error.message },
+						json: { error: (error as Error).message },
 						pairedItem: { item: i },
 					});
 					continue;
 				}
-				if (error.context) {
-					error.context.itemIndex = i;
-					throw error;
-				}
-				throw new NodeOperationError(this.getNode(), error.response?.data ?? error.message, {
-					itemIndex: i,
-				});
+				throw error instanceof NodeOperationError || error instanceof NodeApiError
+					? error
+					: new NodeApiError(this.getNode(), error as JsonObject, { itemIndex: i });
 			}
 		}
 
