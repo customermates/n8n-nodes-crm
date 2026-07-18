@@ -47,12 +47,15 @@
 #
 # ─── RELEASE PROCESS ───────────────────────────────────────────────────────────
 #
-# Run the following command locally to start an interactive release:
+# Create a release branch and run the following command locally to prepare an
+# interactive release commit:
 #
 #   npm run release
 #
-# This will lint, build, prompt for a version bump, update the changelog,
-# commit, tag, and push — which triggers this workflow to publish to npm.
+# This lints, builds, prompts for a version bump, updates the changelog, and
+# creates a Conventional Commit without pushing or tagging. Push the branch and
+# merge its reviewed pull request. Then create the version tag from the merged
+# main commit; the tag triggers this workflow to publish to npm.
 
 name: Publish
 
@@ -96,6 +99,6 @@ jobs:
         #   .npmrc here before publishing.
         run: |
           [ -n "$NPM_TOKEN" ] && npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
-          npm run release
+          npm exec -- n8n-node release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

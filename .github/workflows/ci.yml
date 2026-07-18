@@ -2,12 +2,17 @@ name: CI
 
 on:
   pull_request:
+    branches: [main]
   push:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
-  build:
+  ci:
+    name: ci
     runs-on: ubuntu-latest
 
     steps:
