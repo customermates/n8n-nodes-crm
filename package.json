@@ -52,7 +52,7 @@
 		]
 	},
 	"devDependencies": {
-		"@n8n/node-cli": "^0.38.8",
+		"@n8n/node-cli": "^0.39.3",
 		"@types/node": "^26.1.1",
 		"auto-changelog": "^2.6.0",
 		"eslint": "9.32.0",
