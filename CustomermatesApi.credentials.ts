@@ -49,7 +49,10 @@ export class CustomermatesApi implements ICredentialType {
 	test: ICredentialTestRequest = {
 		request: {
 			baseURL: '={{$credentials.baseURL || "https://customermates.com"}}',
-			url: '/api/v1/users/me',
+			// Any authenticated member may read the record model; /users/me needs the users permission.
+			method: 'POST',
+			url: '/api/v1/model/read',
+			body: { typeIds: [] },
 		},
 	};
 }

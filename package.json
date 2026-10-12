@@ -1,7 +1,7 @@
 {
 	"name": "@customermates/n8n-nodes-crm",
 	"version": "1.4.0",
-	"description": "n8n community node package for Customermates CRM - Modern CRM for small businesses with contacts, organizations, deals, services, and messaging (email, LinkedIn, WhatsApp)",
+	"description": "n8n community node package for Customermates CRM - Modern CRM for small businesses with configurable lists (contacts, organizations, deals, services, tasks and your own), Trash, record webhooks, and messaging (email, LinkedIn, WhatsApp)",
 	"license": "MIT",
 	"homepage": "https://customermates.com",
 	"keywords": [
@@ -38,7 +38,8 @@
 		"prepublishOnly": "n8n-node prerelease"
 	},
 	"files": [
-		"dist"
+		"dist",
+		"!dist/**/*.tsbuildinfo"
 	],
 	"n8n": {
 		"n8nNodesApiVersion": 1,
