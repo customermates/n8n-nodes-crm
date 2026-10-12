@@ -95,10 +95,10 @@ export class Customermates implements INodeType {
 		if (LEGACY_RESOURCES.includes(resource)) {
 			throw new NodeOperationError(
 				this.getNode(),
-				`The "${resource}" resource was removed in version 2 of this node`,
+				`The "${resource}" resource was removed in version 2 of this package`,
 				{
 					description:
-						'Version 2 of the Customermates node replaced the Contact, Deal, Organization, Service and Task resources with the Record resource, because the Customermates API now serves every list through one record API. Choose Resource "Record" and pick the list; see "Migrating from version 1" in the package README.',
+						'Version 2 of this package replaced the Contact, Deal, Organization, Service and Task resources with the Record resource, because the Customermates API now serves every list through one record API. Choose Resource "Record" and pick the list; see "Migrating from version 1" in the package README.',
 				},
 			);
 		}

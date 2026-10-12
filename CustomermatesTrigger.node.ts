@@ -199,7 +199,7 @@ export class CustomermatesTrigger implements INodeType {
 				if (removed.length > 0) {
 					throw new NodeOperationError(
 						this.getNode(),
-						`The trigger events ${removed.join(', ')} were removed in version 2 of this node`,
+						`The trigger events ${removed.join(', ')} were removed in version 2 of this package`,
 						{
 							description:
 								'Use Record Created, Record Updated, Record Deleted (Moved to Trash), Record Restored or Record Deleted Permanently and pick the list. See "Migrating from version 1" in the package README.',

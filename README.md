@@ -12,7 +12,7 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Operations
 
-> **Version 2 is a breaking release.** It targets the configurable Customermates API, where contacts, organizations, deals, services, tasks and every list you create are records of one generic record API. Workflows built with version 1 must be migrated; see [Migrating from version 1](#migrating-from-version-1).
+> **Version 2 (released through the standard release flow) is a breaking release.** It targets the configurable Customermates API, where contacts, organizations, deals, services, tasks and every list you create are records of one generic record API. Workflows built with version 1 must be migrated; see [Migrating from version 1](#migrating-from-version-1).
 
 ### Record
 
@@ -122,7 +122,7 @@ For more information about Customermates API keys, visit the [Customermates docu
 
 - **Minimum n8n version**: 2.0.0
 - **Tested with**: n8n 2.42.6
-- **Customermates**: version 2 of this package requires the configurable record API (`/api/v1/records`, `/api/v1/model`, `/api/v1/trash`). Use version 1.x against an instance without it.
+- **Customermates**: version 2 of this package (released through the standard release flow) requires the configurable record API (`/api/v1/records`, `/api/v1/model`, `/api/v1/trash`). Use version 1.x against an instance without it.
 
 ## Usage
 
