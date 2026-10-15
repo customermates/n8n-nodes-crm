@@ -7,8 +7,12 @@ import type {
 	INodeTypeDescription,
 	IWebhookResponseData,
 } from 'n8n-workflow';
-import { NodeConnectionTypes } from 'n8n-workflow';
+import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 import { apiRequest } from './helpers/api';
+import { discoverModel } from './helpers/model';
+import { loadOptions } from './operations/options';
+
+const REMOVED_EVENT = /^(contact|deal|organization|service|task)\.(created|updated|deleted)$/;
 
 export class CustomermatesTrigger implements INodeType {
 	description: INodeTypeDescription = {
@@ -67,30 +71,6 @@ export class CustomermatesTrigger implements INodeType {
 						value: 'messaging.chat.updated',
 					},
 					{
-						name: 'Contact Created',
-						value: 'contact.created',
-					},
-					{
-						name: 'Contact Deleted',
-						value: 'contact.deleted',
-					},
-					{
-						name: 'Contact Updated',
-						value: 'contact.updated',
-					},
-					{
-						name: 'Deal Created',
-						value: 'deal.created',
-					},
-					{
-						name: 'Deal Deleted',
-						value: 'deal.deleted',
-					},
-					{
-						name: 'Deal Updated',
-						value: 'deal.updated',
-					},
-					{
 						name: 'Email Deleted',
 						value: 'messaging.email.deleted',
 					},
@@ -117,50 +97,73 @@ export class CustomermatesTrigger implements INodeType {
 						value: 'messaging.message.updated',
 					},
 					{
-						name: 'Organization Created',
-						value: 'organization.created',
+						name: 'Record Created',
+						value: 'record.created',
+						description: 'A record was created in a list',
 					},
 					{
-						name: 'Organization Deleted',
-						value: 'organization.deleted',
+						name: 'Record Deleted (Moved to Trash)',
+						value: 'record.deleted',
+						description: 'A record was moved to Trash; it can still be restored for 30 days',
 					},
 					{
-						name: 'Organization Updated',
-						value: 'organization.updated',
+						name: 'Record Deleted Permanently',
+						value: 'record.deletedPermanently',
+						description:
+							'A record was deleted permanently; the payload carries only its reference because its values are erased',
+					},
+					{
+						name: 'Record Restored',
+						value: 'record.restored',
+						description:
+							'A record was restored from Trash; the payload carries its values after restore',
+					},
+					{
+						name: 'Record Updated',
+						value: 'record.updated',
+						description: 'Field values, assignment, channels or links of a record changed',
 					},
 					{
 						name: 'Relation Created',
 						value: 'messaging.relation.created',
 						description: 'A new connection was added on a connected social account',
 					},
-					{
-						name: 'Service Created',
-						value: 'service.created',
-					},
-					{
-						name: 'Service Deleted',
-						value: 'service.deleted',
-					},
-					{
-						name: 'Service Updated',
-						value: 'service.updated',
-					},
-					{
-						name: 'Task Created',
-						value: 'task.created',
-					},
-					{
-						name: 'Task Deleted',
-						value: 'task.deleted',
-					},
-					{
-						name: 'Task Updated',
-						value: 'task.updated',
-					},
 				],
+			},
+			{
+				displayName: 'List Name or ID',
+				name: 'typeId',
+				type: 'options',
+				typeOptions: { loadOptionsMethod: 'loadListOptions' },
+				default: '',
+				displayOptions: {
+					show: {
+						events: [
+							'record.created',
+							'record.updated',
+							'record.deleted',
+							'record.restored',
+							'record.deletedPermanently',
+						],
+					},
+				},
+				description:
+					'Only trigger for records of this list; leave empty for every list. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+			},
+			{
+				displayName: 'Changed Field Names or IDs',
+				name: 'changedFieldIds',
+				type: 'multiOptions',
+				typeOptions: { loadOptionsMethod: 'loadFieldOptions', loadOptionsDependsOn: ['typeId'] },
+				default: [],
+				displayOptions: { show: { events: ['record.updated'] } },
+				description:
+					'Only trigger record updates that change one of these fields (requires a list); leave empty for any change. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 			},
 		],
 	};
+
+	methods = { loadOptions };
 
 	webhookMethods = {
 		default: {
@@ -171,7 +174,19 @@ export class CustomermatesTrigger implements INodeType {
 				}
 				try {
 					const existing = await apiRequest(this, 'GET', `/webhooks/${webhookData.webhookId}`);
-					return existing != null;
+					if (existing == null) {
+						return false;
+					}
+					if (existing.enabled === false || existing.pausedReason) {
+						// A paused or disabled subscription delivers nothing: replace it on activation.
+						await apiRequest(this, 'DELETE', `/webhooks/${webhookData.webhookId}`).catch(
+							() => null,
+						);
+						delete webhookData.webhookId;
+						delete webhookData.secret;
+						return false;
+					}
+					return true;
 				} catch {
 					return false;
 				}
@@ -180,14 +195,36 @@ export class CustomermatesTrigger implements INodeType {
 			async create(this: IHookFunctions): Promise<boolean> {
 				const webhookUrl = this.getNodeWebhookUrl('default') as string;
 				const events = this.getNodeParameter('events', []) as string[];
+				const removed = events.filter((event) => REMOVED_EVENT.test(event));
+				if (removed.length > 0) {
+					throw new NodeOperationError(
+						this.getNode(),
+						`The trigger events ${removed.join(', ')} were removed in version 2 of this package`,
+						{
+							description:
+								'Use Record Created, Record Updated, Record Deleted (Moved to Trash), Record Restored or Record Deleted Permanently and pick the list. See "Migrating from version 1" in the package README.',
+						},
+					);
+				}
 				const secret = randomBytes(32).toString('hex');
-
-				const created = await apiRequest(this, 'POST', '/webhooks', {
+				const body: IDataObject = {
 					url: webhookUrl,
 					events,
 					description: 'n8n trigger',
 					secret,
-				});
+				};
+				if (events.some((event) => event.startsWith('record.'))) {
+					const typeId = this.getNodeParameter('typeId', '') as string;
+					const changedFieldIds = events.includes('record.updated')
+						? (this.getNodeParameter('changedFieldIds', []) as string[])
+						: [];
+					body.expectedSchemaRevision = (await discoverModel(this)).revision;
+					if (typeId) {
+						body.recordTrigger = { query: { typeId }, changedFieldIds };
+					}
+				}
+
+				const created = await apiRequest(this, 'POST', '/webhooks', body);
 
 				const webhookData = this.getWorkflowStaticData('node');
 				webhookData.webhookId = created.id as string;
@@ -231,7 +268,13 @@ export class CustomermatesTrigger implements INodeType {
 			}
 		}
 
-		const body = req.body as { event: string; data: IDataObject; timestamp: string };
+		const body = req.body as {
+			event: string;
+			id?: string;
+			actorId?: string | null;
+			data: IDataObject;
+			timestamp: string;
+		};
 		if (!events.includes(body.event)) {
 			return { workflowData: [[]] };
 		}
@@ -242,6 +285,9 @@ export class CustomermatesTrigger implements INodeType {
 					{
 						json: {
 							event: body.event,
+							eventId: body.id ?? null,
+							actorId: body.actorId ?? null,
+							deliveryId: (req.headers['x-customermates-delivery-id'] as string) ?? null,
 							data: body.data,
 							timestamp: body.timestamp,
 						},

@@ -4,8 +4,8 @@ import type {
 	INodeExecutionData,
 	INodeProperties,
 } from 'n8n-workflow';
+import type { Handler } from '../helpers/api';
 import { apiRequest } from '../helpers/api';
-import type { Handler } from './entities';
 
 const show = (operation: string[]) => ({ show: { resource: ['socialRelation'], operation } });
 

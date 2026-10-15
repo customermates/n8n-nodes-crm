@@ -1,6 +1,6 @@
 import type { IDataObject, IExecuteFunctions, INodeProperties } from 'n8n-workflow';
+import type { Handler } from '../helpers/api';
 import { apiRequest, searchAll, splitList } from '../helpers/api';
-import type { Handler } from './entities';
 
 const show = (operation: string[]) => ({ show: { resource: ['messaging'], operation } });
 

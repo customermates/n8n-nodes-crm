@@ -6,17 +6,23 @@ import type {
 	JsonObject,
 } from 'n8n-workflow';
 import { NodeApiError, NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
-import type { Handler } from './operations/entities';
-import { entityHandlers, entityProperties } from './operations/entities';
+import type { Handler } from './helpers/api';
+import { listHandlers, listProperties } from './operations/lists';
 import { messagingHandlers, messagingProperties } from './operations/messaging';
 import { loadOptions } from './operations/options';
+import { recordHandlers, recordProperties } from './operations/records';
 import { socialRelationHandlers, socialRelationProperties } from './operations/socialRelations';
+import { trashHandlers, trashProperties } from './operations/trash';
 
 const handlers: Record<string, Record<string, Handler>> = {
-	...entityHandlers,
+	list: listHandlers,
 	messaging: messagingHandlers,
+	record: recordHandlers,
 	socialRelation: socialRelationHandlers,
+	trash: trashHandlers,
 };
+
+const LEGACY_RESOURCES = ['contact', 'deal', 'organization', 'service', 'task'];
 
 export class Customermates implements INodeType {
 	methods = { loadOptions };
@@ -28,7 +34,7 @@ export class Customermates implements INodeType {
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Create and edit data in Customermates',
+		description: 'Create, find and edit records of any list in Customermates',
 		defaults: {
 			name: 'Customermates',
 		},
@@ -49,39 +55,35 @@ export class Customermates implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Contact',
-						value: 'contact',
-					},
-					{
-						name: 'Deal',
-						value: 'deal',
+						name: 'List',
+						value: 'list',
+						description: 'The lists (record types) of the workspace and their fields',
 					},
 					{
 						name: 'Messaging',
 						value: 'messaging',
 					},
 					{
-						name: 'Organization',
-						value: 'organization',
-					},
-					{
-						name: 'Service',
-						value: 'service',
+						name: 'Record',
+						value: 'record',
+						description: 'Records of any list, such as contacts, deals or your own lists',
 					},
 					{
 						name: 'Social Relation',
 						value: 'socialRelation',
 					},
 					{
-						name: 'Task',
-						value: 'task',
+						name: 'Trash',
+						value: 'trash',
 					},
 				],
-				default: 'contact',
+				default: 'record',
 			},
-			...entityProperties,
+			...recordProperties,
+			...listProperties,
 			...messagingProperties,
 			...socialRelationProperties,
+			...trashProperties,
 		],
 	};
 
@@ -90,6 +92,16 @@ export class Customermates implements INodeType {
 		const returnData: INodeExecutionData[] = [];
 
 		const resource = this.getNodeParameter('resource', 0) as string;
+		if (LEGACY_RESOURCES.includes(resource)) {
+			throw new NodeOperationError(
+				this.getNode(),
+				`The "${resource}" resource was removed in version 2 of this package`,
+				{
+					description:
+						'Version 2 of this package replaced the Contact, Deal, Organization, Service and Task resources with the Record resource, because the Customermates API now serves every list through one record API. Choose Resource "Record" and pick the list; see "Migrating from version 1" in the package README.',
+				},
+			);
+		}
 		const operation = this.getNodeParameter('operation', 0) as string;
 		const handler = handlers[resource]?.[operation];
 		if (!handler) {
